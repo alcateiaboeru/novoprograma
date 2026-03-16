@@ -862,12 +862,10 @@ body.mobile-mode .chk {
 /* botão confirmar fixo na base */
 #mob-sb-confirm {
   display:none;
-  position:fixed;
-  bottom:0;left:0;right:0;
-  padding:12px 16px 20px;
+  padding:10px 14px 18px;
   background:#fff;
   border-top:1px solid #eee;
-  z-index:200;
+  flex-shrink:0;
 }
 .mob-confirm-btn {
   width:100%;padding:15px;border:none;border-radius:14px;
@@ -1124,12 +1122,9 @@ body.mobile-mode #mob-sb-confirm {
       <div class="spec-grid" id="q-specs"></div>
     </div>
   </div>
-</div>
-
   <div id="mob-sb-confirm">
     <button class="mob-confirm-btn" id="mob-confirm-btn-el">✓ Confirmar e voltar</button>
   </div>
-
 </div>
 
 <script>
