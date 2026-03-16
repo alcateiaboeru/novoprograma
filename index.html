@@ -778,104 +778,6 @@ body.mobile-mode .mob-acol-list {
   padding:10px 12px 80px;
 }
 
-/* ══ SIDEBAR MOBILE ══ */
-body.mobile-mode .sb {
-  width:100% !important;
-  border-left:none !important;
-  border-top:6px solid #c0392b;
-  display:flex !important;
-  flex-direction:column !important;
-}
-body.mobile-mode .panels {
-  flex:1 !important;
-  min-height:0 !important;
-  overflow-y:auto !important;
-  position:relative !important;
-}
-body.mobile-mode .panel {
-  position:relative !important;
-  inset:auto !important;
-  overflow-y:visible !important;
-  min-height:200px;
-}
-body.mobile-mode .panel.on {
-  display:flex !important;
-}
-
-/* header maior */
-body.mobile-mode .sb-hdr {
-  padding:20px 20px 16px !important;
-}
-body.mobile-mode .sb-nome {
-  font-size:24px !important;
-  margin-bottom:10px !important;
-}
-body.mobile-mode .sb-desc {
-  font-size:14px !important;
-  margin-bottom:12px !important;
-}
-body.mobile-mode .prog-wrap {
-  height:10px !important;
-  border-radius:5px !important;
-}
-body.mobile-mode .prog-bar {
-  border-radius:5px !important;
-}
-body.mobile-mode .prog-pct {
-  font-size:18px !important;
-}
-body.mobile-mode .badge {
-  font-size:13px !important;
-  padding:5px 14px !important;
-}
-
-/* abas maiores e mais destacadas */
-body.mobile-mode .tabs {
-  border-bottom:3px solid #eee;
-}
-body.mobile-mode .tab {
-  padding:14px 6px !important;
-  font-size:14px !important;
-}
-body.mobile-mode .tab.on {
-  background:#fff;
-  border-bottom-color:#c0392b;
-}
-body.mobile-mode .tab-cnt {
-  font-size:11px !important;
-  padding:2px 7px !important;
-}
-
-/* cards com fonte maior */
-body.mobile-mode .card {
-  font-size:15px !important;
-  padding:14px 16px !important;
-  border-radius:14px !important;
-  gap:14px !important;
-}
-body.mobile-mode .chk {
-  width:30px !important;
-  height:30px !important;
-  font-size:15px !important;
-}
-
-/* botão confirmar fixo na base */
-#mob-sb-confirm {
-  display:none;
-  padding:10px 14px 18px;
-  background:#fff;
-  border-top:1px solid #eee;
-  flex-shrink:0;
-}
-.mob-confirm-btn {
-  width:100%;padding:15px;border:none;border-radius:14px;
-  background:#2a7a2a;color:#fff;
-  font-family:'Baloo 2',cursive;font-size:17px;font-weight:800;
-  cursor:pointer;-webkit-appearance:none;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-}
-.mob-confirm-btn:active { filter:brightness(.9); }
-
 /* ══ SIDEBAR MOBILE SCROLL ══ */
 body.mobile-mode .sb {
   display:flex !important;
@@ -921,6 +823,58 @@ body.mobile-mode #mob-sb-confirm {
   position:relative !important;
   bottom:auto !important;
   padding:10px 14px 16px !important;
+}
+
+
+/* ══ SIDEBAR MOBILE ══ */
+body.mobile-mode .sb {
+  display:flex !important;
+  flex-direction:column !important;
+  overflow:hidden !important;
+  height:100% !important;
+}
+/* título sticky — não scrolla */
+body.mobile-mode .sb-nome {
+  background:#fff;
+  padding-bottom:10px !important;
+  border-bottom:2px solid #eee;
+}
+/* desc e progresso — scrollam */
+body.mobile-mode .sb-hdr {
+  flex-shrink:0;
+}
+/* abas — não scrollam */
+body.mobile-mode .tabs {
+  flex-shrink:0;
+}
+/* área de scroll — entre abas e botão */
+body.mobile-mode .panels {
+  flex:1 !important;
+  min-height:0 !important;
+  overflow-y:auto !important;
+  -webkit-overflow-scrolling:touch !important;
+  position:relative !important;
+}
+body.mobile-mode .panel {
+  position:relative !important;
+  top:auto !important;
+  left:auto !important;
+  right:auto !important;
+  bottom:auto !important;
+  overflow:visible !important;
+  padding:12px 16px 16px !important;
+  min-height:100px;
+}
+body.mobile-mode .panel.on {
+  display:flex !important;
+  flex-direction:column !important;
+}
+/* botão — não scrolla, sempre visível na base */
+body.mobile-mode #mob-sb-confirm {
+  flex-shrink:0 !important;
+  padding:10px 14px 20px !important;
+  background:#fff !important;
+  border-top:2px solid #eee !important;
 }
 </style>
 </head>
@@ -1123,11 +1077,22 @@ body.mobile-mode #mob-sb-confirm {
     </div>
   </div>
   <div id="mob-sb-confirm">
-    <button class="mob-confirm-btn" id="mob-confirm-btn-el">✓ Confirmar e voltar</button>
+    <button class="mob-confirm-btn" id="mob-confirm-btn-el"><span class="btn-icon">💾</span> Salvar</button>
   </div>
 </div>
 
 <script>
+
+function updateStickyTop(){
+  if(!isMobile) return;
+  var nome = document.getElementById('sb-nome');
+  var tabs = document.querySelector('.tabs');
+  if(nome && tabs){
+    var h = nome.offsetHeight;
+    tabs.style.top = h + 'px';
+  }
+}
+
 
 function mobConfirmSB(){
   closeSB();
@@ -2082,7 +2047,7 @@ function openSB(id){
   document.getElementById('sidebar').classList.add('open');
   document.getElementById('ov').classList.add('on');
   refreshBlocos();
-  if(isMobile){ document.getElementById('mob-sb-confirm').style.display='block'; }
+  if(isMobile){ document.getElementById('mob-sb-confirm').style.display='block'; setTimeout(updateStickyTop,50); }
 }
 
 function renderSB(id){
