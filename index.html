@@ -560,17 +560,21 @@ body.mobile-mode .app { padding-bottom:58px; }
 .mob-tab.active .mt-icon { transform:scale(1.15); }
 
 /* lista de blocos mobile */
-.mob-bloco-list { padding:10px 12px 20px;display:grid;grid-template-columns:1fr 1fr;gap:8px; }
-.mob-eixo-hdr-grid { grid-column:1/-1;padding:6px 12px;font-family:'Baloo 2',cursive;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;border-radius:8px;margin-top:8px; }
+.mob-bloco-list { padding:10px 12px 20px;display:flex;flex-direction:column;gap:0; }
+.mob-eixo-hdr-grid { padding:6px 12px;font-family:'Baloo 2',cursive;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;border-radius:8px;margin-top:8px;margin-bottom:6px; }
 .mob-bloco-item {
   border-radius:14px;padding:13px 14px;
-  display:flex;align-items:center;gap:12px;
+  display:-webkit-flex;display:flex;
+  -webkit-align-items:center;align-items:center;
+  gap:12px;
   cursor:pointer;border:0.5px solid #e0e0e8;
   background:#fff;
   border-left-width:5px !important;
   transition:transform .1s;
-  -webkit-appearance:none;width:100%;text-align:left;
+  -webkit-appearance:none;
+  text-align:left;
   position:relative;overflow:hidden;
+  box-sizing:border-box;
 }
 .mob-bloco-item:active { transform:scale(.98); }
 .mob-bloco-item.done-item { background:#f0fff4; }
@@ -582,6 +586,8 @@ body.mobile-mode .app { padding-bottom:58px; }
 .mob-bloco-bar  { height:100%;border-radius:3px;transition:width .4s; }
 .mob-bloco-pct  { display:none; }
 .mob-bloco-check { font-size:18px;flex-shrink:0; }
+.mob-eixo-grid { display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;gap:8px;margin-bottom:4px; }
+.mob-eixo-grid .mob-bloco-item { -webkit-flex:1 1 calc(50% - 4px);flex:1 1 calc(50% - 4px);min-width:calc(50% - 4px);max-width:calc(50% - 4px); }
 
 /* eixo header na lista */
 
