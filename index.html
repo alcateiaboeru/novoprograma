@@ -1127,7 +1127,7 @@ body.mobile-mode #mob-sb-confirm {
 </div>
 
   <div id="mob-sb-confirm">
-    <button class="mob-confirm-btn" onclick="mobConfirmSB()">✓ Confirmar e voltar</button>
+    <button class="mob-confirm-btn" id="mob-confirm-btn-el">✓ Confirmar e voltar</button>
   </div>
 
 </div>
@@ -2782,6 +2782,8 @@ function anim(){
     if(btnBlocos)  btnBlocos.addEventListener('click',  function(){ mobTab('blocos'); });
     if(btnEtapas)  btnEtapas.addEventListener('click',  function(){ mobTab('etapas'); });
     if(btnAcolhida)btnAcolhida.addEventListener('click',function(){ mobTab('acolhida'); });
+    var btnConfirm = document.getElementById('mob-confirm-btn-el');
+    if(btnConfirm) btnConfirm.addEventListener('click', function(){ mobConfirmSB(); });
 
     // Cards do home
     var cards = document.querySelectorAll('.mob-step-card');
@@ -2811,6 +2813,8 @@ function anim(){
     if(btnBlocos)  btnBlocos.addEventListener('click',  function(){ mobTab('blocos'); });
     if(btnEtapas)  btnEtapas.addEventListener('click',  function(){ mobTab('etapas'); });
     if(btnAcolhida)btnAcolhida.addEventListener('click',function(){ mobTab('acolhida'); });
+    var btnConfirm = document.getElementById('mob-confirm-btn-el');
+    if(btnConfirm) btnConfirm.addEventListener('click', function(){ mobConfirmSB(); });
 
     // Cards do home
     var cards = document.querySelectorAll('.mob-step-card');
