@@ -818,12 +818,7 @@ body.mobile-mode .panel.on {
   display:flex !important;
 }
 /* botão fixo na base sem sobrepor conteúdo */
-body.mobile-mode #mob-sb-confirm {
-  flex-shrink:0;
-  position:relative !important;
-  bottom:auto !important;
-  padding:10px 14px 16px !important;
-}
+
 
 
 /* ══ SIDEBAR MOBILE ══ */
@@ -872,7 +867,8 @@ body.mobile-mode .panel.on {
 /* botão — não scrolla, sempre visível na base */
 body.mobile-mode #mob-sb-confirm {
   flex-shrink:0 !important;
-  padding:10px 14px 20px !important;
+  position:relative !important;
+  padding:14px 16px 24px !important;
   background:#fff !important;
   border-top:2px solid #eee !important;
 }
@@ -1036,7 +1032,7 @@ body.mobile-mode #mob-sb-confirm {
     </div>
   </div>
 
-  <div class="ftr"><p>🐺 &nbsp; Akela! Nós faremos o nosso melhor! &nbsp; 🐺</p></div>
+  <div class="ftr"><p>🐺 &nbsp; Akela! Nós faremos o nosso melhor! &nbsp; 🐺 &nbsp;·&nbsp; <span style="opacity:.5;">v1.2</span></p></div>
 </div>
 
 <!-- SIDEBAR -->
@@ -1076,8 +1072,8 @@ body.mobile-mode #mob-sb-confirm {
       <div class="spec-grid" id="q-specs"></div>
     </div>
   </div>
-  <div id="mob-sb-confirm">
-    <button class="mob-confirm-btn" id="mob-confirm-btn-el"><span class="btn-icon">💾</span> Salvar</button>
+  <div id="mob-sb-confirm" style="padding:14px 16px 24px;background:#fff;border-top:2px solid #eee;">
+    <button id="mob-confirm-btn-el" style="width:100%;padding:20px;border:none;border-radius:20px;background:linear-gradient(135deg,#1a5c1a,#2a9a2a);color:#fff;font-family:Baloo 2,cursive;font-size:24px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:14px;box-shadow:0 8px 24px rgba(42,122,42,.5);cursor:pointer;-webkit-appearance:none;"><span style="font-size:30px;">💾</span> Salvar</button>
   </div>
 </div>
 
@@ -2907,7 +2903,7 @@ function anim(){
         <span class="mob-step-arrow">›</span>
       </button>
     </div>
-    <div class="mob-home-lema">🐺 Akela! Nós faremos o nosso melhor! 🐺</div>
+    <div class="mob-home-lema">🐺 Akela! Nós faremos o nosso melhor! 🐺<br><span style="font-size:9px;opacity:.4;letter-spacing:.5px;">v1.2</span></div>
   </div>
 </div>
 
