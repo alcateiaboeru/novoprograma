@@ -682,11 +682,13 @@ body.mobile-mode .sb.open { transform:translateX(0); }
   #mob-etapas:not(.mob-active),
   #mob-acolhida:not(.mob-active) { display:none !important; }
   #mob-home:not(.mob-active) { display:flex !important; }
-  #mob-search-bar { display:flex !important; }
+  #mob-search-bar { display:block !important; }
+  .hdr-inner { flex-wrap:wrap; }
 }
 @media screen and (orientation: landscape) {
   .mob-panel { display:none !important; }
   #mob-nav { display:none !important; }
+  #mob-search-bar { display:none !important; }
 }
 
 /* ══ DRAWER LATERAL MOBILE ══ */
@@ -970,6 +972,8 @@ body.mobile-mode #mob-search-bar {
     </svg>
     <div class="hdr-inner">
       <button id="mob-ham-btn" onclick="openDrawer()">☰</button>
+      <!-- Lupa mobile -->
+      <button id="mob-search-btn" style="display:none;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);color:#fff;font-size:18px;cursor:pointer;-webkit-appearance:none;align-items:center;justify-content:center;flex-shrink:0;">🔍</button>
       <span class="hdr-wolf">🐺</span>
       <h1>Minha jornada na alcateia</h1>
       <div class="search-wrap">
@@ -1016,15 +1020,6 @@ body.mobile-mode #mob-search-bar {
       </div>
     </div>
   </div>
-
-  <!-- BUSCA MOBILE -->
-  <div id="mob-search-bar" style="background:#1a3a1a;padding:8px 12px;">
-    <div id="mob-search-trigger" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 12px;flex:1;cursor:pointer;">
-      <span style="font-size:14px;opacity:.7;">🔍</span>
-      <span style="font-family:'Nunito',sans-serif;font-size:14px;color:rgba(255,255,255,.6);">Buscar atividade, especialidade...</span>
-    </div>
-  </div>
-
 
 <div class="main">
     <div class="col-left">
@@ -1124,7 +1119,7 @@ body.mobile-mode #mob-search-bar {
     </div>
   </div>
 
-  <div class="ftr"><p>🐺 &nbsp; Akela! Nós faremos o nosso melhor! &nbsp; 🐺 &nbsp;·&nbsp; <span style="opacity:.5;">v1.4</span></p></div>
+  <div class="ftr"><p>🐺 &nbsp; Akela! Nós faremos o nosso melhor! &nbsp; 🐺 &nbsp;·&nbsp; <span style="opacity:.5;">v1.8</span></p></div>
 </div>
 
 <!-- SIDEBAR -->
@@ -1328,6 +1323,10 @@ const EIXO_INFO = {
 function applyMobileMode(){
   isMobile = detectMobile();
   document.body.classList.toggle('mobile-mode', isMobile);
+  var sb = document.getElementById('mob-search-bar');
+  if(sb) sb.style.display = isMobile ? 'block' : 'none';
+  var mobSrBtn = document.getElementById('mob-search-btn');
+  if(mobSrBtn) mobSrBtn.style.display = isMobile ? 'flex' : 'none';
   if(isMobile){
     mobActiveTab = mobActiveTab || 'home';
     mobTab(mobActiveTab);
@@ -2890,6 +2889,8 @@ function anim(){
     if(btnConfirm) btnConfirm.addEventListener('click', function(){ mobConfirmSB(); });
     var srTrigger = document.getElementById('mob-search-trigger');
     if(srTrigger) srTrigger.addEventListener('click', openMobSearch);
+    var mobSearchBtn = document.getElementById('mob-search-btn');
+    if(mobSearchBtn) mobSearchBtn.addEventListener('click', openMobSearch);
     var srClose = document.getElementById('mob-sr-close-btn');
     if(srClose) srClose.addEventListener('click', closeMobSearch);
     var srInput = document.getElementById('mob-search-full');
@@ -2928,6 +2929,8 @@ function anim(){
     if(btnConfirm) btnConfirm.addEventListener('click', function(){ mobConfirmSB(); });
     var srTrigger = document.getElementById('mob-search-trigger');
     if(srTrigger) srTrigger.addEventListener('click', openMobSearch);
+    var mobSearchBtn = document.getElementById('mob-search-btn');
+    if(mobSearchBtn) mobSearchBtn.addEventListener('click', openMobSearch);
     var srClose = document.getElementById('mob-sr-close-btn');
     if(srClose) srClose.addEventListener('click', closeMobSearch);
     var srInput = document.getElementById('mob-search-full');
@@ -3065,7 +3068,7 @@ function anim(){
         <span class="mob-step-arrow">›</span>
       </button>
     </div>
-    <div class="mob-home-lema">🐺 Akela! Nós faremos o nosso melhor! 🐺<br><span style="font-size:9px;opacity:.4;letter-spacing:.5px;">v1.4</span></div>
+    <div class="mob-home-lema">🐺 Akela! Nós faremos o nosso melhor! 🐺<br><span style="font-size:9px;opacity:.4;letter-spacing:.5px;">v1.8</span></div>
   </div>
 </div>
 
