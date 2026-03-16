@@ -1,0 +1,2634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Minha Jornada na Alcateia — Ramo Lobinho 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;font-family:'Nunito',sans-serif;}
+.app{display:grid;grid-template-rows:auto 1fr auto;height:100vh;background:#1a1a1a;overflow:hidden;}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#14501a 0%,#2a7a2a 50%,#0d5025 100%);padding:11px 22px;position:relative;overflow:hidden;flex-shrink:0;}
+.hdr svg{position:absolute;inset:0;width:100%;height:100%;opacity:.12;pointer-events:none;}
+.hdr-inner{position:relative;display:flex;align-items:center;gap:12px;}
+.hdr-wolf{font-size:28px;}
+.hdr h1{font-family:'Baloo 2'sive;font-size:22px;font-weight:800;color:#f5e642;text-shadow:1px 1px 0 rgba(0,0,0,.4);}
+.hdr p{font-size:11px;color:#aae8aa;font-weight:600;margin-left:auto;}
+
+/* MAIN */
+.main{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;min-height:0;}
+
+/* ESQUERDA */
+.col-left{background:#f4f0fc;padding:12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;border-right:2px solid #d4cce8;}
+.col-title{font-family:'Baloo 2'sive;font-size:13px;font-weight:700;text-align:center;flex-shrink:0;}
+.eixos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1;min-height:0;overflow:hidden;}
+.eixo-col{border-radius:10px;overflow:hidden;display:flex;flex-direction:column;}
+.eixo-hdr{padding:8px 5px 6px;text-align:center;flex-shrink:0;}
+.e-icon{font-size:18px;display:block;margin-bottom:2px;}
+.eixo-hdr h4{font-family:'Baloo 2'sive;font-size:11px;font-weight:700;line-height:1.2;}
+.eixo-body{padding:4px;display:grid;grid-template-rows:repeat(5,1fr);gap:4px;flex:1;min-height:0;overflow:hidden;}
+.bloco{border-radius:7px;padding:4px 5px;text-align:center;font-size:11px;font-weight:600;line-height:1.3;cursor:pointer;user-select:none;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:0;white-space:normal;transition:opacity .4s,transform .2s,box-shadow .15s;position:relative;}
+.bloco:hover{transform:scale(1.04);box-shadow:0 2px 10px rgba(0,0,0,.18);}
+
+
+
+.bloco.active-detail{outline:3px solid #f5a623 !important;outline-offset:2px;transform:scale(1.04);}
+.bloco.done-bloco{opacity:.3 !important;cursor:pointer !important;pointer-events:auto !important;}
+.bloco.done-bloco::after{content:'✓';position:absolute;top:-5px;right:-5px;width:18px;height:18px;border-radius:50%;background:#2a7a2a;color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 4px rgba(0,0,0,.3);}
+.b-icon{font-size:13px;display:block;margin-bottom:2px;flex-shrink:0;}
+.e1 .eixo-hdr{background:#c0392b;}.e1 .eixo-hdr h4,.e1 .e-icon{color:#ffd6d6;}
+.e1 .eixo-body{background:#fdf0ee;}.e1 .bloco{background:#f5c6c0;color:#7a1a10;}
+.e2 .eixo-hdr{background:#27ae60;}.e2 .eixo-hdr h4,.e2 .e-icon{color:#d0f8e0;}
+.e2 .eixo-body{background:#eaf8f0;}.e2 .bloco{background:#b8eece;color:#0a4a28;}
+.e3 .eixo-hdr{background:#2980b9;}.e3 .eixo-hdr h4,.e3 .e-icon{color:#d0e8ff;}
+.e3 .eixo-body{background:#edf4ff;}.e3 .bloco{background:#c8dff8;color:#09427a;}
+.e4 .eixo-hdr{background:#d35400;}.e4 .eixo-hdr h4,.e4 .e-icon{color:#ffe0cc;}
+.e4 .eixo-body{background:#fff4ee;}.e4 .bloco{background:#fdd0b0;color:#7a2a05;}
+
+/* DIREITA */
+.col-right{background:#eef8ee;padding:12px;display:flex;flex-direction:column;gap:8px;overflow:hidden;}
+.stages{display:flex;gap:6px;flex-shrink:0;}
+.stage-col{flex:1;display:flex;flex-direction:column;gap:4px;min-height:0;}
+.stage{border-radius:10px;padding:8px 5px 7px;text-align:center;transition:border-color .3s;border:2px solid transparent;position:relative;flex-shrink:0;}
+.stage.complete{transform:none;}
+.s1{background:#fff3d4;border-color:#e6a800;}.s2{background:#d4eeff;border-color:#2a90d4;}
+.s3{background:#fde8d4;border-color:#e05a20;}.s4{background:#ead4ff;border-color:#8b3fcc;}
+
+.stage.complete{border-color:#2a7a2a !important;}
+.stage.complete::after{content:'✓';position:absolute;top:-7px;right:-7px;width:20px;height:20px;border-radius:50%;background:#2a7a2a;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3);animation:popIn .4s cubic-bezier(.17,.67,.35,1.4);}
+@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.s-icon{font-size:22px;display:block;margin-bottom:2px;}
+.s-name{font-family:'Baloo 2'sive;font-size:11px;font-weight:700;line-height:1.2;margin-bottom:3px;}
+.s1 .s-name{color:#7a4800;}.s2 .s-name{color:#09427a;}.s3 .s-name{color:#7a2a05;}.s4 .s-name{color:#4a1575;}
+.s-badge{font-size:9px;font-weight:700;padding:2px 5px;border-radius:99px;display:inline-block;transition:background .3s;}
+.s1 .s-badge{background:#e6a800;color:#fff;}.s2 .s-badge{background:#2a90d4;color:#fff;}
+.s3 .s-badge{background:#e05a20;color:#fff;}.s4 .s-badge{background:#8b3fcc;color:#fff;}
+.stage.complete .s-badge{background:#2a7a2a !important;color:#fff !important;}
+.stage-chips{display:flex;flex-direction:column;gap:3px;overflow:hidden;}
+.stage-chip{border-radius:7px;padding:5px 8px;font-size:10px;font-weight:600;line-height:1.35;display:flex;align-items:flex-start;gap:5px;cursor:pointer;user-select:none;transition:opacity .15s,transform .1s;animation:chipIn .22s cubic-bezier(.17,.67,.35,1.3);flex-shrink:0;width:100%;white-space:normal;word-break:break-word;}
+.stage-chip:hover{opacity:.72;transform:scale(.97);}
+.stage-chip .ci{font-size:12px;flex-shrink:0;margin-top:1px;}.stage-chip .cn{flex:1;white-space:normal;word-break:break-word;}.stage-chip .rm{font-size:10px;opacity:.6;flex-shrink:0;margin-top:1px;}.stage-chip.done-chip{cursor:default;}.stage-chip.done-chip:hover{opacity:1;transform:none;}.done-chip .rm{display:none;}.done-chip::after{content:'✓';font-size:11px;font-weight:700;opacity:.8;flex-shrink:0;margin-top:1px;}
+@keyframes chipIn{from{opacity:0;transform:translateY(-4px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+.chip-e1{background:#c0392b;color:#fff;}.chip-e2{background:#27ae60;color:#fff;}
+.chip-e3{background:#2980b9;color:#fff;}.chip-e4{background:#d35400;color:#fff;}
+.hint{font-size:10px;text-align:center;color:#888;font-style:italic;flex-shrink:0;}
+
+.crz-mini{background:#1a1a3a;border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0;margin-top:auto;}
+.crz-mini .stars{font-size:16px;letter-spacing:2px;}
+.crz-mini h4{font-family:'Baloo 2'sive;font-size:12px;font-weight:700;color:#f5e642;line-height:1.2;margin-bottom:1px;}
+.crz-mini p{font-size:9.5px;color:#a0b8d8;line-height:1.35;}
+
+/* OVERLAY */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99;opacity:0;pointer-events:none;transition:opacity .3s;}
+.ov.on{opacity:1;pointer-events:auto;}
+
+/* SIDEBAR */
+.sb{
+  position:fixed;top:0;right:0;bottom:0;width:78%;
+  background:#fff;
+  display:grid;grid-template-rows:auto auto 1fr;
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  z-index:100;overflow:hidden;
+  border-left:3px solid #e0e0e8;
+  box-shadow:-8px 0 40px rgba(0,0,0,.2);
+}
+.sb.open{transform:translateX(0);}
+
+/* cabeçalho sidebar */
+.sb-hdr{
+  border-left:6px solid #c0392b;
+  padding:10px 18px 8px;background:#fff;
+  border-bottom:0.5px solid #eee;
+}
+.sb-eixo{font-family:'Nunito',sans-serif;font-size:9px;font-weight:700;letter-spacing:.9px;text-transform:uppercase;margin-bottom:1px;}
+.sb-nome{font-family:'Baloo 2'sive;font-size:22px;font-weight:800;color:#1a1a2e;line-height:1.05;margin-bottom:3px;}
+.sb-desc{font-family:'Nunito',sans-serif;font-size:12px;font-weight:600;color:#222;line-height:1.4;margin-bottom:5px;}
+.sb-prog-row{display:flex;align-items:center;gap:12px;}
+.prog-wrap{flex:1;height:6px;background:#eee;border-radius:3px;overflow:hidden;}
+.prog-bar{height:100%;border-radius:3px;background:#4a7ad8;transition:width .4s,background .4s;}
+.prog-pct{font-family:'Baloo 2'sive;font-size:13px;font-weight:700;min-width:36px;text-align:right;}
+.badge{font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;border:1.5px solid;}
+.b-ok{background:#e8f5e8;color:#1a6b2a;border-color:#4caf64;}
+.b-no{background:#f5f5f8;color:#999;border-color:#ddd;}
+.sb-close{position:absolute;top:14px;right:16px;width:36px;height:36px;border-radius:50%;background:#f0f0f4;border:none;color:#666;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;}
+.sb-close:hover{background:#e0e0e8;}
+
+/* abas */
+.tabs{display:flex;border-bottom:2px solid #eee;background:#fafafa;flex-shrink:0;}
+.tab{flex:1;padding:5px 10px;font-family:'Baloo 2'sive;font-size:13px;font-weight:700;text-align:center;cursor:pointer;color:#999;border-bottom:3px solid transparent;margin-bottom:-2px;transition:color .15s,border-color .15s,background .15s;user-select:none;}
+.tab:hover{color:#555;background:#f0f0f0;}
+.tab.on{color:#1a1a2e;border-bottom-color:#c0392b;background:#fff;}
+.tab-cnt{display:inline-flex;align-items:center;justify-content:center;font-family:'Baloo 2'sive;font-size:11px;font-weight:700;padding:1px 7px;border-radius:99px;margin-left:5px;vertical-align:middle;transition:background .3s,color .3s;}
+.cnt-pending{background:#e8e8f0;color:#777;}
+.cnt-partial{background:#2a4a8a;color:#fff;}
+.cnt-done{background:#2a7a2a;color:#fff;}
+.ci-ins{background:#f8f0ff;border-color:#c084fc;}
+.cv-spec{background:#fdf8e8;border-color:#d4a020 !important;}
+.cv-ar{background:#e8f4ff;border-color:#60a8e8 !important;}
+.cv-ar .chk{border-color:#2a7ab8;}
+.cv-ar.ck{background:#c8dff8;border-color:#2a7ab8;}
+.cv-ar.ck .chk{background:#2a7ab8;border-color:#2a7ab8;color:#fff;}
+.cv-mar{background:#e8fff8;border-color:#20b8a0 !important;}
+.cv-mar .chk{border-color:#0a8870;}
+.cv-mar.ck{background:#b8eedd;border-color:#0a8870;}
+.cv-mar.ck .chk{background:#0a8870;border-color:#0a8870;color:#fff;}
+.badge-ar{display:inline-block;background:#2a7ab8;color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:99px;margin-left:5px;vertical-align:middle;}
+.badge-mar{display:inline-block;background:#0a8870;color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:99px;margin-left:5px;vertical-align:middle;}
+.cv-spec .chk{border-color:#c8880a;}
+.cv-spec.ck{background:#f8e8b8;border-color:#d4a020;}
+.cv-spec.ck .chk{background:#c8880a;border-color:#c8880a;color:#fff;}
+.cv-spec .badge-sv{display:inline-block;background:#c8880a;color:#fff;font-size:9px;font-weight:700;padding:1px 6px;border-radius:99px;margin-left:5px;vertical-align:middle;}
+.ci-ins .chk{border-color:#9333ea;}
+.ci-ins.ck{background:#ead5ff;border-color:#9333ea;}
+.ci-ins.ck .chk{background:#9333ea;border-color:#9333ea;color:#fff;}
+.badge-ins{display:inline-block;background:#9333ea;color:#fff;font-size:9px;font-weight:700;padding:1px 7px;border-radius:99px;margin-left:6px;vertical-align:middle;letter-spacing:.3px;}
+.tab-icon{font-size:13px;display:inline;margin-right:5px;}
+
+/* painéis */
+.panels{overflow:hidden;position:relative;min-height:0;}
+.panel{position:absolute;inset:0;padding:10px 16px;display:none;flex-direction:column;gap:7px;overflow:hidden;}
+.panel.on{display:flex;}
+
+/* card list / grid */
+.card-list{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;overflow:hidden;}
+.card-grid{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px;overflow-y:auto;overflow-x:hidden;}
+.spec-grid{flex:1;min-height:0;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;align-content:start;overflow-y:auto;overflow-x:hidden;}
+
+/* cards */
+.card{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:10px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#222;line-height:1.4;cursor:pointer;user-select:none;border:2px solid transparent;transition:background .15s,border-color .2s,transform .1s;}
+.card.ck{font-weight:400;color:#333;}
+.card:hover{transform:scale(1.01);}
+.card:active{transform:scale(.99);}
+.cf{background:#f0faf0;border-color:#c8e8c8;}
+.cf:hover{background:#e4f5e4;}.cf.ck{background:#d0ecd0;border-color:#4caf64;}
+.cv{background:#f0f4fc;border-color:#d0d8f0;}
+.cv:hover{background:#e4eaf8;}.cv.ck{background:#d4e0f4;border-color:#4a7ad8;}
+.cs{background:#fdf6ec;border-color:#f0d898;flex:0 0 auto;min-height:0;}
+.cs:hover{background:#faefd8;}.cs.ck{background:#f8e8b8;border-color:#d4a020;}
+.chk{width:22px;height:22px;border-radius:50%;border:2px solid #ccc;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Baloo 2'sive;font-size:12px;font-weight:700;color:transparent;transition:background .2s,border-color .2s,color .2s;}
+.ck .chk{color:#fff;}
+.cf.ck .chk{background:#2a7a2a;border-color:#2a7a2a;}
+.cv.ck .chk{background:#2a4a8a;border-color:#2a4a8a;}
+.cs.ck .chk{background:#c8880a;border-color:#c8880a;}
+.card-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.card-txt{flex:1;}
+
+/* sub-cabeçalho painel */
+.psub{font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;padding:4px 10px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;gap:8px;}
+.ps-fix{background:#e8f5e8;color:#1a6b2a;}
+.ps-var{background:#e8eef8;color:#1a3a7a;}
+.ps-spec{background:#fdf3e0;color:#7a4a0a;}
+.ps-cnt{font-family:'Baloo 2'sive;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px;margin-left:auto;}
+.pc-v{background:#2a4a8a;color:#fff;}.pc-ok{background:#2a7a2a;color:#fff;}
+
+/* scrollbar suave */
+.card-grid::-webkit-scrollbar,.card-list::-webkit-scrollbar,.spec-grid::-webkit-scrollbar{width:4px;}
+.card-grid::-webkit-scrollbar-track,.card-list::-webkit-scrollbar-track,.spec-grid::-webkit-scrollbar-track{background:transparent;}
+.card-grid::-webkit-scrollbar-thumb,.card-list::-webkit-scrollbar-thumb,.spec-grid::-webkit-scrollbar-thumb{background:#ccc;border-radius:2px;}
+
+/* separador OU */
+.ou-sep{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.ou-l{flex:1;height:1.5px;background:#eee;border-radius:1px;}
+.ou-t{font-family:'Baloo 2'sive;font-size:14px;font-weight:700;color:#bbb;}
+.ou-note{font-family:'Nunito',sans-serif;font-size:12px;color:#999;text-align:center;flex-shrink:0;}
+
+/* FOOTER */
+.ftr{background:#1a5c1a;padding:5px 16px;text-align:center;flex-shrink:0;}
+.ftr p{font-size:9px;color:#b8f0b8;font-weight:600;}
+
+/* ══ FESTA DO BLOCO ══ */
+#festa-overlay{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9998;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .3s;
+}
+#festa-overlay.show{pointer-events:auto;opacity:1;}
+.festa-card{
+  background:#fff;
+  border-radius:24px;
+  padding:40px 56px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  transform:scale(.7);
+  transition:transform .4s cubic-bezier(.17,.67,.35,1.4);
+  max-width:420px;
+}
+#festa-overlay.show .festa-card{transform:scale(1);}
+.festa-emoji{font-size:64px;display:block;margin-bottom:12px;animation:bounce 0.6s ease infinite alternate;}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-12px)}}
+.festa-titulo{font-family:'Baloo 2'sive;font-size:28px;font-weight:800;color:#1a1a2e;margin-bottom:8px;line-height:1.1;}
+.festa-sub{font-family:'Nunito',sans-serif;font-size:16px;color:#555;margin-bottom:24px;line-height:1.5;}
+.festa-btn{
+  font-family:'Baloo 2'sive;font-size:16px;font-weight:700;
+  background:#2a7a2a;color:#fff;
+  border:none;border-radius:99px;
+  padding:12px 32px;cursor:pointer;
+  transition:transform .1s,background .15s;
+}
+.festa-btn:hover{background:#1a5a1a;transform:scale(1.04);}
+.festa-btn:active{transform:scale(.97);}
+.festa-stars{font-size:24px;letter-spacing:4px;margin-bottom:8px;display:block;}
+
+/* ══ CONQUISTA DE ETAPA ══ */
+#etapa-overlay{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9998;pointer-events:none;opacity:0;
+  transition:opacity .3s;
+  background:rgba(0,0,0,.55);
+}
+#etapa-overlay.show{pointer-events:auto;opacity:1;}
+.etapa-card{
+  background:#fff;border-radius:28px;
+  padding:44px 64px;text-align:center;
+  box-shadow:0 24px 80px rgba(0,0,0,.35);
+  transform:scale(.7);
+  transition:transform .45s cubic-bezier(.17,.67,.35,1.4);
+  max-width:480px;position:relative;overflow:hidden;
+}
+#etapa-overlay.show .etapa-card{transform:scale(1);}
+.etapa-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0) 60%,rgba(255,255,255,.4));
+  pointer-events:none;
+}
+.etapa-stars{font-size:28px;letter-spacing:6px;display:block;margin-bottom:10px;animation:starPop .6s ease;}
+@keyframes starPop{0%{transform:scale(0) rotate(-20deg);opacity:0}70%{transform:scale(1.2) rotate(5deg);}100%{transform:scale(1) rotate(0);opacity:1;}}
+.etapa-icon{font-size:80px;display:block;margin-bottom:10px;animation:iconBounce .7s ease infinite alternate;}
+@keyframes iconBounce{from{transform:translateY(0) scale(1)}to{transform:translateY(-14px) scale(1.08)}}
+.etapa-titulo{font-family:'Baloo 2'sive;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.etapa-nome{font-family:'Baloo 2'sive;font-size:36px;font-weight:800;color:#1a1a2e;line-height:1.05;margin-bottom:8px;}
+.etapa-msg{font-family:'Nunito',sans-serif;font-size:15px;color:#555;line-height:1.5;margin-bottom:28px;}
+.etapa-btn{
+  font-family:'Baloo 2'sive;font-size:16px;font-weight:700;
+  color:#fff;border:none;border-radius:99px;
+  padding:13px 36px;cursor:pointer;
+  transition:transform .1s,filter .15s;
+}
+.etapa-btn:hover{filter:brightness(1.1);transform:scale(1.04);}
+.etapa-btn:active{transform:scale(.97);}
+
+/* ══ PERÍODO DE ACOLHIDA ══ */
+#acolhida-banner{
+  background:#fff8e8;border:2px solid #f5a623;border-radius:10px;
+  padding:10px 14px;display:flex;align-items:center;gap:12px;
+  flex-shrink:0;cursor:pointer;transition:background .15s;
+  margin:0 12px 8px;
+}
+#acolhida-banner:hover{background:#fff0cc;}
+#acolhida-banner.done{background:#e8f5e8;border-color:#4caf64;}
+.acol-icon{font-size:26px;flex-shrink:0;}
+.acol-txt{flex:1;}
+.acol-txt h4{font-family:'Baloo 2'sive;font-size:13px;font-weight:700;color:#7a4a00;margin-bottom:2px;}
+#acolhida-banner.done .acol-txt h4{color:#1a5c1a;}
+.acol-txt p{font-size:10px;color:#9a6a20;line-height:1.3;}
+#acolhida-banner.done .acol-txt p{color:#2a7a2a;}
+.acol-prog-wrap{height:5px;background:#f0e0c0;border-radius:3px;overflow:hidden;margin-top:4px;}
+#acolhida-banner.done .acol-prog-wrap{background:#c8e8c8;}
+.acol-prog-bar{height:100%;background:#f5a623;border-radius:3px;transition:width .4s;}
+#acolhida-banner.done .acol-prog-bar{background:#4caf64;}
+.acol-btn{background:#f5a623;color:#fff;border:none;border-radius:8px;padding:7px 12px;font-family:'Baloo 2'sive;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:filter .15s;}
+.acol-btn:hover{filter:brightness(1.1);}
+#acolhida-banner.done .acol-btn{background:#2a7a2a;}
+
+/* sidebar de acolhida */
+#acol-sidebar{
+  position:fixed;top:0;right:0;bottom:0;width:50%;
+  background:#fff;
+  display:flex;flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .32s cubic-bezier(.4,0,.2,1);
+  z-index:100;overflow:hidden;
+  border-left:6px solid #f5a623;
+  box-shadow:-8px 0 40px rgba(0,0,0,.2);
+}
+#acol-sidebar.open{transform:translateX(0);}
+.acol-sb-hdr{padding:16px 18px 14px;background:#fff8e8;border-bottom:1px solid #f0d890;display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.acol-sb-hdr h2{font-family:'Baloo 2'sive;font-size:20px;font-weight:800;color:#7a4a00;flex:1;}
+.acol-sb-hdr p{font-size:11px;color:#9a6a20;margin-top:2px;}
+.acol-sb-close{width:32px;height:32px;border-radius:50%;background:#f0e0c0;border:none;color:#7a4a00;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.acol-sb-close:hover{background:#e0d0b0;}
+.acol-sb-body{flex:1;min-height:0;padding:10px 16px;display:flex;flex-direction:column;gap:4px;overflow:hidden;}
+.acol-card{
+  flex:1;min-height:0;
+  display:flex;align-items:flex-start;gap:8px;
+  padding:7px 12px;border-radius:9px;
+  font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#222;line-height:1.45;
+  cursor:pointer;border:2px solid #f0d890;background:#fffbf0;
+  transition:background .15s,border-color .2s;
+}
+.acol-card:hover{background:#fff3cc;}
+.acol-card.ck{background:#fff3cc;border-color:#f5a623;}
+.acol-chk{width:24px;height:24px;border-radius:50%;border:2.5px solid #e0c080;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'Baloo 2'sive;font-size:13px;font-weight:700;color:transparent;transition:all .2s;}
+.acol-card.ck .acol-chk{background:#f5a623;border-color:#f5a623;color:#fff;}
+.acol-sb-footer{padding:12px 18px;border-top:1px solid #f0d890;flex-shrink:0;background:#fff8e8;}
+.acol-footer-prog{display:flex;align-items:center;gap:10px;}
+.acol-footer-wrap{flex:1;height:8px;background:#f0e0c0;border-radius:4px;overflow:hidden;}
+.acol-footer-bar{height:100%;background:#f5a623;border-radius:4px;transition:width .4s;}
+.acol-footer-pct{font-family:'Baloo 2'sive;font-size:13px;font-weight:700;color:#f5a623;}
+
+/* ══ BUSCA ══ */
+.search-wrap{position:relative;flex:1;max-width:320px;}
+.search-input-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:8px;padding:6px 12px;border:1.5px solid rgba(255,255,255,.2);transition:border-color .15s;}
+.search-input-row:focus-within{border-color:#f5e642;background:rgba(255,255,255,.18);}
+.search-icon{font-size:14px;opacity:.7;flex-shrink:0;}
+#search-input{flex:1;border:none;background:transparent;font-family:'Nunito',sans-serif;font-size:13px;color:#fff;outline:none;}
+#search-input::placeholder{color:rgba(255,255,255,.5);}
+#search-count{font-size:10px;font-weight:700;color:#f5e642;white-space:nowrap;flex-shrink:0;display:none;}
+#search-clear{font-size:14px;cursor:pointer;opacity:.6;flex-shrink:0;display:none;color:#fff;}
+#search-clear:hover{opacity:1;}
+
+#search-dropdown{
+  position:fixed;top:52px;left:50%;transform:translateX(-50%);width:600px;
+  background:#fff;border:1.5px solid #e0e0e8;
+  border-radius:10px;overflow:hidden;
+  box-shadow:0 8px 28px rgba(0,0,0,.25);
+  max-height:420px;overflow-y:auto;
+  z-index:9990;display:none;
+}
+#search-dropdown.show{display:block;}
+#search-dropdown::-webkit-scrollbar{width:4px;}
+#search-dropdown::-webkit-scrollbar-thumb{background:#ddd;border-radius:2px;}
+
+.sd-item{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:0.5px solid #f0f0f8;cursor:pointer;transition:background .1s;}
+.sd-item:last-child{border-bottom:none;}
+.sd-item:hover{background:#f5f5ff;}
+.sd-left{flex:1;min-width:0;}
+.sd-crumb{display:flex;align-items:center;gap:3px;font-size:9px;color:#999;margin-bottom:2px;flex-wrap:wrap;line-height:1.4;}
+.sd-crumb .sep{color:#ddd;}
+.sd-eixo{font-weight:700;}
+.sd-bloco{color:#444;font-weight:600;}
+.sd-tipo{border-radius:4px;padding:1px 5px;font-size:8.5px;font-weight:700;white-space:nowrap;}
+.st-fix{background:#e8f5e8;color:#1a6b2a;}
+.st-var{background:#e8eef8;color:#2a4a8a;}
+.st-spec{background:#fdf3e0;color:#7a4a0a;}
+.st-ins{background:#f8f0ff;color:#6b21a8;}
+.st-ar{background:#e0f0ff;color:#1a5a9a;}
+.st-mar{background:#e0fff8;color:#0a6858;}
+.sd-txt{font-size:11.5px;color:#222;font-weight:700;line-height:1.4;}
+.sd-txt mark{background:#fff3a0;border-radius:2px;padding:0 1px;font-weight:700;font-style:normal;}
+.sd-go{font-size:13px;color:#ccc;flex-shrink:0;transition:color .1s;}
+.sd-item:hover .sd-go{color:#2a7a2a;}
+.sd-empty{padding:16px;text-align:center;font-size:12px;color:#aaa;}
+.sd-acolhida{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:0.5px solid #f0f0f8;cursor:pointer;transition:background .1s;background:#fffbf0;}
+.sd-acolhida:hover{background:#fff3cc;}
+
+/* ══ BLOQUEIO ACOLHIDA ══ */
+#lock-banner{
+  flex:1;min-height:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#fff8e8 0%,#ffecc0 100%);
+  border-radius:14px;border:3px dashed #f5a623;
+  padding:24px;text-align:center;
+  gap:12px;
+}
+#lock-banner.hidden{display:none;}
+.lock-wolf{font-size:64px;animation:wolfBounce .8s ease infinite alternate;}
+@keyframes wolfBounce{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-10px) rotate(5deg)}}
+.lock-title{font-family:'Baloo 2'sive;font-size:22px;font-weight:800;color:#7a4a00;line-height:1.2;}
+.lock-sub{font-family:'Nunito',sans-serif;font-size:14px;color:#9a6a20;line-height:1.5;max-width:300px;}
+.lock-prog-row{display:flex;align-items:center;gap:10px;width:100%;max-width:280px;}
+.lock-prog-wrap{flex:1;height:10px;background:#f0d8a0;border-radius:5px;overflow:hidden;}
+.lock-prog-bar{height:100%;background:#f5a623;border-radius:5px;transition:width .4s;}
+.lock-prog-lbl{font-family:'Baloo 2'sive;font-size:13px;font-weight:700;color:#f5a623;white-space:nowrap;}
+.lock-btn{
+  font-family:'Baloo 2'sive;font-size:14px;font-weight:700;
+  background:#f5a623;color:#fff;border:none;border-radius:99px;
+  padding:10px 24px;cursor:pointer;
+  transition:transform .1s,filter .15s;
+  box-shadow:0 4px 12px rgba(245,166,35,.4);
+}
+.lock-btn:hover{filter:brightness(1.08);transform:scale(1.04);}
+
+/* ══ FESTA ACOLHIDA ══ */
+#acol-festa-overlay{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9998;pointer-events:none;opacity:0;
+  transition:opacity .3s;
+  background:rgba(0,0,0,.6);
+}
+#acol-festa-overlay.show{pointer-events:auto;opacity:1;}
+.acol-festa-card{
+  background:#fff;border-radius:28px;
+  padding:44px 64px;text-align:center;
+  box-shadow:0 24px 80px rgba(0,0,0,.35);
+  transform:scale(.7);
+  transition:transform .45s cubic-bezier(.17,.67,.35,1.4);
+  max-width:480px;
+  border-top:6px solid #f5a623;
+}
+#acol-festa-overlay.show .acol-festa-card{transform:scale(1);}
+.acol-festa-stars{font-size:28px;letter-spacing:6px;display:block;margin-bottom:10px;animation:starPop .6s ease;}
+.acol-festa-wolf{font-size:80px;display:block;margin-bottom:10px;animation:iconBounce .7s ease infinite alternate;}
+.acol-festa-titulo{font-family:'Baloo 2'sive;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#f5a623;margin-bottom:6px;}
+.acol-festa-nome{font-family:'Baloo 2'sive;font-size:32px;font-weight:800;color:#1a1a2e;line-height:1.1;margin-bottom:8px;}
+.acol-festa-msg{font-family:'Nunito',sans-serif;font-size:15px;color:#555;line-height:1.5;margin-bottom:28px;}
+.acol-festa-btn{
+  font-family:'Baloo 2'sive;font-size:16px;font-weight:700;
+  background:#f5a623;color:#fff;border:none;border-radius:99px;
+  padding:13px 36px;cursor:pointer;
+  transition:transform .1s,filter .15s;
+}
+.acol-festa-btn:hover{filter:brightness(1.1);transform:scale(1.04);}
+#cc{position:fixed;inset:0;pointer-events:none;z-index:9999;}
+
+@keyframes blocoFly{0%{transform:scale(1);opacity:1;}50%{transform:scale(1.15);}100%{transform:translateX(80px) scale(.4);opacity:0;}}
+.bloco.flying{animation:blocoFly .5s ease-in forwards;pointer-events:none;}
+
+
+/* ══ CONFIGURAÇÕES ══ */
+.cfg-btn{
+  width:34px;height:34px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.3);
+  color:#fff;font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,transform .15s;flex-shrink:0;
+  margin-left:8px;
+}
+.cfg-btn:hover{background:rgba(255,255,255,.28);transform:rotate(45deg);}
+
+#cfg-modal{
+  position:fixed;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  z-index:9997;opacity:0;pointer-events:none;
+  transition:opacity .25s;
+  background:rgba(0,0,0,.5);
+}
+#cfg-modal.show{opacity:1;pointer-events:auto;}
+.cfg-card{
+  background:#fff;border-radius:20px;
+  padding:32px 36px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  width:360px;
+  transform:scale(.85);
+  transition:transform .3s cubic-bezier(.17,.67,.35,1.4);
+}
+#cfg-modal.show .cfg-card{transform:scale(1);}
+.cfg-card h3{font-family:'Baloo 2'sive;font-size:20px;font-weight:800;color:#1a1a2e;margin-bottom:4px;}
+.cfg-card p{font-size:12px;color:#888;margin-bottom:20px;}
+.cfg-field{display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}
+.cfg-field label{font-size:12px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.6px;}
+.cfg-field input{
+  padding:10px 14px;border-radius:10px;
+  border:2px solid #e0e0e8;
+  font-family:'Nunito',sans-serif;font-size:15px;color:#1a1a2e;
+  outline:none;transition:border-color .15s;
+}
+.cfg-field input:focus{border-color:#2a7a2a;}
+.cfg-actions{display:flex;gap:10px;justify-content:flex-end;}
+.cfg-cancel{background:#f0f0f4;color:#666;border:none;border-radius:99px;padding:9px 20px;font-family:'Baloo 2'sive;font-size:13px;font-weight:700;cursor:pointer;}
+.cfg-cancel:hover{background:#e0e0e8;}
+.cfg-save{background:#2a7a2a;color:#fff;border:none;border-radius:99px;padding:9px 20px;font-family:'Baloo 2'sive;font-size:13px;font-weight:700;cursor:pointer;transition:filter .15s;}
+.cfg-save:hover{filter:brightness(1.1);}
+
+/* nome do lobinho no header */
+.wolf-name{font-family:'Baloo 2'sive;font-size:12px;font-weight:700;color:#b8f0b8;opacity:.9;white-space:nowrap;}
+
+.cfg-divider{height:1px;background:#f0f0f4;margin:16px 0;}
+.cfg-reset-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.cfg-reset-title{font-size:12px;font-weight:700;color:#c0392b;margin-bottom:2px;}
+.cfg-reset-sub{font-size:11px;color:#999;line-height:1.4;}
+.cfg-reset-btn{
+  background:#fff0f0;color:#c0392b;border:2px solid #f0c0c0;
+  border-radius:8px;padding:7px 14px;
+  font-family:'Baloo 2'sive;font-size:12px;font-weight:700;
+  cursor:pointer;white-space:nowrap;flex-shrink:0;
+  transition:background .15s,border-color .15s;
+}
+.cfg-reset-btn:hover{background:#ffe0e0;border-color:#c0392b;}
+.cfg-confirm-row{
+  background:#fff5f5;border:2px solid #f0c0c0;border-radius:10px;
+  padding:12px 14px;margin-bottom:16px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.cfg-confirm-txt{font-size:12px;font-weight:700;color:#c0392b;}
+.cfg-reset-confirm{
+  background:#c0392b;color:#fff;border:none;border-radius:99px;
+  padding:7px 16px;font-family:'Baloo 2'sive;font-size:12px;font-weight:700;
+  cursor:pointer;transition:filter .15s;white-space:nowrap;
+}
+.cfg-reset-confirm:hover{filter:brightness(1.1);}
+
+/* ══ MODO MOBILE ══ */
+body.mobile-mode .app {
+  display:flex;flex-direction:column;height:100vh;overflow:hidden;
+}
+body.mobile-mode .hdr { flex-shrink:0; }
+body.mobile-mode .main { display:none !important; }
+body.mobile-mode .ftr { display:none; }
+body.mobile-mode .col-left, body.mobile-mode .col-right { display:none; }
+
+/* painel mobile ativo */
+/* painel ativo controlado por JS */
+.mob-panel {
+  display:none;
+  position:fixed;top:52px;left:0;right:0;bottom:58px;
+  overflow-y:auto;
+  background:#f4f0fc;
+  flex-direction:column;
+}
+.mob-panel.mp-etapas { background:#eef8ee; }
+.mob-panel.mp-acolhida { background:#fffbf0; }
+
+/* nav bar inferior */
+#mob-nav {
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;
+  background:#fff;border-top:1.5px solid #e0e0e8;
+  height:58px;z-index:500;
+  flex-direction:row;
+}
+body.mobile-mode #mob-nav { display:flex; }
+body.mobile-mode .app { padding-bottom:58px; }
+
+.mob-tab {
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;cursor:pointer;color:#aaa;transition:color .15s;
+  font-family:'Nunito',sans-serif;font-size:10px;font-weight:700;
+  border:none;background:transparent;
+}
+.mob-tab .mt-icon { font-size:20px; }
+.mob-tab.active { color:#2a7a2a; }
+.mob-tab.active .mt-icon { transform:scale(1.15); }
+
+/* lista de blocos mobile */
+.mob-bloco-list { padding:10px 12px;display:flex;flex-direction:column;gap:8px; }
+.mob-bloco-item {
+  background:#fff;border-radius:12px;padding:12px 14px;
+  display:flex;align-items:center;gap:12px;
+  cursor:pointer;border:2px solid transparent;
+  transition:border-color .15s,transform .1s;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
+}
+.mob-bloco-item:active { transform:scale(.98); }
+.mob-bloco-item.done-item { opacity:.5; }
+.mob-bloco-icon { font-size:26px;flex-shrink:0; }
+.mob-bloco-info { flex:1;min-width:0; }
+.mob-bloco-eixo { font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:2px; }
+.mob-bloco-nome { font-family:'Baloo 2',cursive;font-size:15px;font-weight:700;color:#1a1a2e;line-height:1.2;margin-bottom:5px; }
+.mob-bloco-prog { height:5px;background:#eee;border-radius:3px;overflow:hidden; }
+.mob-bloco-bar  { height:100%;border-radius:3px;transition:width .4s; }
+.mob-bloco-pct  { font-size:10px;font-weight:700;margin-top:3px; }
+.mob-bloco-check { font-size:20px;flex-shrink:0; }
+
+/* eixo header na lista */
+.mob-eixo-hdr {
+  padding:10px 14px 4px;
+  font-family:'Baloo 2',cursive;font-size:12px;font-weight:700;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+
+/* etapas mobile */
+.mob-etapas-list { padding:10px 12px;display:flex;flex-direction:column;gap:10px; }
+.mob-etapa-card {
+  border-radius:14px;padding:14px 16px;
+  border:2px solid transparent;
+}
+.mob-etapa-hdr { display:flex;align-items:center;gap:10px;margin-bottom:8px; }
+.mob-etapa-icon { font-size:28px; }
+.mob-etapa-nome { font-family:'Baloo 2',cursive;font-size:16px;font-weight:800; }
+.mob-etapa-badge { font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;margin-left:auto; }
+.mob-etapa-chips { display:flex;flex-direction:column;gap:5px; }
+.mob-etapa-chip {
+  background:rgba(255,255,255,.6);border-radius:8px;
+  padding:7px 10px;font-size:12px;font-weight:600;
+  display:flex;align-items:center;gap:8px;
+}
+.mob-etapa-empty { font-size:11px;opacity:.6;font-style:italic;padding:4px 0; }
+
+/* sidebar fullscreen mobile */
+body.mobile-mode .sb {
+  width:100% !important;
+  border-left:none !important;
+  border-top:4px solid #c0392b;
+}
+body.mobile-mode .sb.open { transform:translateX(0); }
+
+/* acolhida mobile */
+.mob-acol-list { padding:10px 12px;display:flex;flex-direction:column;gap:8px; }
+.mob-acol-hdr { padding:12px 14px 4px;font-family:'Baloo 2',cursive;font-size:16px;font-weight:800;color:#7a4a00; }
+.mob-acol-prog-row { display:flex;align-items:center;gap:10px;padding:0 14px 10px; }
+.mob-acol-prog-wrap { flex:1;height:8px;background:#f0e0c0;border-radius:4px;overflow:hidden; }
+.mob-acol-prog-fill { height:100%;background:#f5a623;border-radius:4px;transition:width .4s; }
+.mob-acol-prog-lbl { font-family:'Baloo 2',cursive;font-size:12px;font-weight:700;color:#f5a623; }
+
+/* ══ HOME MOBILE ══ */
+.mob-panel.mp-home { background:linear-gradient(160deg,#1a3a1a 0%,#2a5a2a 100%) !important; }
+.mob-home-inner { padding:20px 16px 24px;display:flex;flex-direction:column;gap:16px;flex:1; }
+.mob-home-hero { text-align:center;padding:16px 0 8px; }
+.mob-home-wolf { font-size:64px;display:block;animation:wolfBounce .8s ease infinite alternate; }
+.mob-home-title { font-family:'Baloo 2',cursive;font-size:26px;font-weight:800;color:#f5e642;margin-top:8px;line-height:1.1; }
+.mob-home-sub { font-size:13px;color:#aae8aa;margin-top:6px;line-height:1.5; }
+
+.mob-home-steps { display:flex;flex-direction:column;gap:10px; }
+.mob-step-card {
+  -webkit-appearance:none;
+  text-align:left;
+  width:100%;
+  background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:14px 16px;
+  display:flex;align-items:center;gap:14px;
+  cursor:pointer;transition:background .15s,transform .1s;
+}
+.mob-step-card:active { transform:scale(.98); }
+.mob-step-card:hover { background:rgba(255,255,255,.18); }
+.mob-step-num {
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Baloo 2',cursive;font-size:16px;font-weight:800;
+  color:#fff;flex-shrink:0;
+}
+.mob-step-icon { font-size:28px;flex-shrink:0; }
+.mob-step-info { flex:1; }
+.mob-step-title { font-family:'Baloo 2',cursive;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px; }
+.mob-step-desc { font-size:11.5px;color:rgba(255,255,255,.7);line-height:1.45; }
+.mob-step-status { font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;flex-shrink:0; }
+.mob-step-arrow { font-size:16px;color:rgba(255,255,255,.5);flex-shrink:0; }
+
+.mob-home-lema {
+  text-align:center;font-family:'Baloo 2',cursive;font-size:13px;
+  color:rgba(255,255,255,.5);font-style:italic;margin-top:auto;padding-top:8px;
+}
+
+/* ══ PORTRAIT = MOBILE (CSS puro) ══ */
+@media screen and (orientation: portrait) {
+  .app { display:flex !important; flex-direction:column !important; }
+  .main { display:none !important; }
+  .ftr { display:none !important; }
+  #mob-nav { display:flex !important; }
+  .hdr h1 { font-size:15px !important; }
+  .search-wrap { display:none !important; }
+  .wolf-name { display:none !important; }
+  .hdr { padding:6px 14px !important; }
+  /* mostrar painel home por padrão no portrait */
+  #mob-home { display:flex !important; flex-direction:column !important; }
+  /* esconder outros painéis mobile a menos que ativados por JS */
+  #mob-blocos:not(.mob-active),
+  #mob-etapas:not(.mob-active),
+  #mob-acolhida:not(.mob-active) { display:none !important; }
+  #mob-home:not(.mob-active) { display:flex !important; }
+}
+@media screen and (orientation: landscape) {
+  .mob-panel { display:none !important; }
+  #mob-nav { display:none !important; }
+}
+</style>
+</head>
+<body>
+<canvas id="cc"></canvas>
+<div class="ov" id="ov" onclick="closeSB();closeAcolhida();"></div>
+
+<div class="app">
+  <div class="hdr">
+    <svg viewBox="0 0 1200 54" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="40" cy="14" rx="34" ry="13" fill="#a8f0a8" transform="rotate(-20,40,14)"/>
+      <ellipse cx="1160" cy="12" rx="30" ry="12" fill="#a8f0a8" transform="rotate(20,1160,12)"/>
+      <ellipse cx="600" cy="3" rx="24" ry="8" fill="#b0f0b0"/>
+    </svg>
+    <div class="hdr-inner">
+      <span class="hdr-wolf">🐺</span>
+      <h1>Minha jornada na alcateia</h1>
+      <div class="search-wrap">
+        <div class="search-input-row">
+          <span class="search-icon">🔍</span>
+          <input id="search-input" type="text" placeholder="Buscar atividade, especialidade, bloco..." autocomplete="off">
+          <span id="search-count"></span>
+          <span id="search-clear" onclick="clearSearch()">✕</span>
+        </div>
+        <div id="search-dropdown"></div>
+      </div>
+      <span class="wolf-name" id="wolf-name-display"></span>
+      <button class="cfg-btn" onclick="openConfig()" title="Configurações">⚙️</button>
+    </div>
+  </div>
+
+  <!-- MODAL CONFIGURAÇÕES -->
+  <div id="cfg-modal" onclick="if(event.target===this)closeConfig()">
+    <div class="cfg-card">
+      <h3>⚙️ Configurações</h3>
+      <p>Personalize o cartaz da jornada</p>
+      <div class="cfg-field">
+        <label>🐺 Nome do Lobinho</label>
+        <input type="text" id="cfg-nome" placeholder="Como se chama o lobinho?" maxlength="40">
+      </div>
+      <div class="cfg-divider"></div>
+      <div class="cfg-reset-row">
+        <div>
+          <div class="cfg-reset-title">⚠️ Apagar todo o progresso</div>
+          <div class="cfg-reset-sub">Remove todas as atividades marcadas, blocos e etapas conquistadas.</div>
+        </div>
+        <button class="cfg-reset-btn" onclick="confirmReset()">Resetar</button>
+      </div>
+      <div id="cfg-confirm" class="cfg-confirm-row" style="display:none;">
+        <span class="cfg-confirm-txt">Tem certeza? Isso não pode ser desfeito.</span>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <button class="cfg-cancel" onclick="cancelReset()">Cancelar</button>
+          <button class="cfg-reset-confirm" onclick="doReset()">Sim, apagar tudo</button>
+        </div>
+      </div>
+      <div class="cfg-actions">
+        <button class="cfg-cancel" onclick="closeConfig()">Cancelar</button>
+        <button class="cfg-save" onclick="saveConfig()">Salvar ✓</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="col-left">
+      <div class="col-title" style="color:#4a1575">Os 4 Eixos e os 18 Blocos de Aprendizagem</div>
+      <div class="eixos-grid">
+        <div class="eixo-col e1">
+          <div class="eixo-hdr"><span class="e-icon">🧠</span><h4>Habilidades<br>para a Vida</h4></div>
+          <div class="eixo-body">
+            <div class="bloco" data-id="b1" data-eixo="e1" data-icon="🎨" data-nome="Criatividade e Inovação"      onclick="blocoClick(this)"><span class="b-icon">🎨</span>Criatividade e Inovação</div>
+            <div class="bloco" data-id="b2" data-eixo="e1" data-icon="😌" data-nome="Inteligência Emocional"       onclick="blocoClick(this)"><span class="b-icon">😌</span>Inteligência Emocional</div>
+            <div class="bloco" data-id="b3" data-eixo="e1" data-icon="📚" data-nome="Aprendizagem Contínua"        onclick="blocoClick(this)"><span class="b-icon">📚</span>Aprendizagem Contínua</div>
+            <div class="bloco" data-id="b4" data-eixo="e1" data-icon="🧭" data-nome="Autonomia e Liderança"        onclick="blocoClick(this)"><span class="b-icon">🧭</span>Autonomia e Liderança</div>
+            <div style="visibility:hidden;"></div>
+          </div>
+        </div>
+        <div class="eixo-col e2">
+          <div class="eixo-hdr"><span class="e-icon">🌿</span><h4>Meio<br>Ambiente</h4></div>
+          <div class="eixo-body">
+            <div class="bloco" data-id="b5" data-eixo="e2" data-icon="🌡️" data-nome="Mudanças Climáticas"          onclick="blocoClick(this)"><span class="b-icon">🌡️</span>Mudanças Climáticas</div>
+            <div class="bloco" data-id="b6" data-eixo="e2" data-icon="♻️" data-nome="Consumo Responsável"           onclick="blocoClick(this)"><span class="b-icon">♻️</span>Consumo Responsável</div>
+            <div class="bloco" data-id="b7" data-eixo="e2" data-icon="🦋" data-nome="Preservação da Biodiversidade" onclick="blocoClick(this)"><span class="b-icon">🦋</span>Preservação da Biodiversidade</div>
+            <div class="bloco" data-id="b8" data-eixo="e2" data-icon="🏕️" data-nome="Vida ao Ar Livre"              onclick="blocoClick(this)"><span class="b-icon">🏕️</span>Vida ao Ar Livre</div>
+            <div style="visibility:hidden;"></div>
+          </div>
+        </div>
+        <div class="eixo-col e3">
+          <div class="eixo-hdr"><span class="e-icon">🕊️</span><h4>Paz e<br>Desenvolvimento</h4></div>
+          <div class="eixo-body">
+            <div class="bloco" data-id="b9"  data-eixo="e3" data-icon="🕊️" data-nome="Promoção da Paz"             onclick="blocoClick(this)"><span class="b-icon">🕊️</span>Promoção da Paz</div>
+            <div class="bloco" data-id="b10" data-eixo="e3" data-icon="🏛️" data-nome="Herança Cultural"             onclick="blocoClick(this)"><span class="b-icon">🏛️</span>Herança Cultural</div>
+            <div class="bloco" data-id="b11" data-eixo="e3" data-icon="🗳️" data-nome="Democracia"                   onclick="blocoClick(this)"><span class="b-icon">🗳️</span>Democracia</div>
+            <div class="bloco" data-id="b12" data-eixo="e3" data-icon="🌍" data-nome="Comunidade"                   onclick="blocoClick(this)"><span class="b-icon">🌍</span>Comunidade</div>
+            <div class="bloco" data-id="b13" data-eixo="e3" data-icon="💛" data-nome="Valores"                      onclick="blocoClick(this)"><span class="b-icon">💛</span>Valores</div>
+          </div>
+        </div>
+        <div class="eixo-col e4">
+          <div class="eixo-hdr"><span class="e-icon">❤️</span><h4>Saúde e<br>Bem-Estar</h4></div>
+          <div class="eixo-body">
+            <div class="bloco" data-id="b14" data-eixo="e4" data-icon="🥗" data-nome="Hábitos Saudáveis"            onclick="blocoClick(this)"><span class="b-icon">🥗</span>Hábitos Saudáveis</div>
+            <div class="bloco" data-id="b15" data-eixo="e4" data-icon="🧠" data-nome="Saúde Mental"                 onclick="blocoClick(this)"><span class="b-icon">🧠</span>Saúde Mental</div>
+            <div class="bloco" data-id="b16" data-eixo="e4" data-icon="💪" data-nome="Cuidado com o Corpo"        onclick="blocoClick(this)"><span class="b-icon">💪</span>Conhecimento do Corpo</div>
+            <div class="bloco" data-id="b17" data-eixo="e4" data-icon="🤝" data-nome="Vínculos Saudáveis"           onclick="blocoClick(this)"><span class="b-icon">🤝</span>Vínculos Saudáveis</div>
+            <div class="bloco" data-id="b18" data-eixo="e4" data-icon="✨" data-nome="Espiritualidade"              onclick="blocoClick(this)"><span class="b-icon">✨</span>Espiritualidade</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-right">
+      <!-- BANNER ACOLHIDA -->
+      <div id="acolhida-banner" onclick="openAcolhida()">
+        <div class="acol-icon">🐾</div>
+        <div class="acol-txt">
+          <h4 id="acol-banner-title">Complete o Período de Acolhida primeiro!</h4>
+          <p id="acol-banner-sub">Antes de iniciar os blocos, conclua as 7 atividades de integração à alcateia.</p>
+          <div class="acol-prog-wrap"><div class="acol-prog-bar" id="acol-prog-bar" style="width:0%"></div></div>
+        </div>
+        <button class="acol-btn" id="acol-btn">Ver atividades →</button>
+      </div>
+
+      <!-- BANNER DE BLOQUEIO (visível enquanto acolhida incompleta) -->
+      <div id="lock-banner">
+        <span class="lock-wolf">🐺</span>
+        <div class="lock-title">Bem-vindo à Alcateia!</div>
+        <div class="lock-sub">Complete o <strong>Período de Acolhida</strong> para desbloquear sua jornada nos blocos de aprendizagem.</div>
+        <div class="lock-prog-row">
+          <div class="lock-prog-wrap"><div class="lock-prog-bar" id="lock-prog-bar" style="width:0%"></div></div>
+          <div class="lock-prog-lbl" id="lock-prog-lbl">0 / 7</div>
+        </div>
+        <button class="lock-btn" onclick="openAcolhida()">🐾 Ver atividades de acolhida</button>
+      </div>
+
+      <div class="col-title" style="color:#1a5c1a">Etapas da jornada — escolha uma e clique nos blocos ←</div>
+      <div class="stages">
+        <div class="stage-col">
+          <div class="stage s1" id="st1"><span class="s-icon">🐾</span><div class="s-name">Lobo<br>Pata Tenra</div><span class="s-badge" id="sb1">4 blocos</span></div>
+          <div class="stage-chips" id="chips1"></div>
+        </div>
+        <div class="stage-col">
+          <div class="stage s2" id="st2"><span class="s-icon">🌊</span><div class="s-name">Lobo<br>Saltador</div><span class="s-badge" id="sb2">+4 blocos</span></div>
+          <div class="stage-chips" id="chips2"></div>
+        </div>
+        <div class="stage-col">
+          <div class="stage s3" id="st3"><span class="s-icon">🔍</span><div class="s-name">Lobo<br>Rastreador</div><span class="s-badge" id="sb3">+5 blocos</span></div>
+          <div class="stage-chips" id="chips3"></div>
+        </div>
+        <div class="stage-col">
+          <div class="stage s4" id="st4"><span class="s-icon">🏹</span><div class="s-name">Lobo<br>Caçador</div><span class="s-badge" id="sb4">+5 blocos</span></div>
+          <div class="stage-chips" id="chips4"></div>
+        </div>
+      </div>
+      <div class="hint" id="hint">Conclua um bloco para ele migrar automaticamente para a etapa correta</div>
+      <div class="crz-mini">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <div><h4>Cruzeiro do Sul ✦</h4><p>Complete todos os 18 blocos e os requisitos do Caminho do Caçador</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ftr"><p>🐺 &nbsp; Akela! Nós faremos o nosso melhor! &nbsp; 🐺</p></div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sb" id="sidebar">
+  <button class="sb-close" onclick="closeSB()">✕</button>
+
+  <div class="sb-hdr">
+    <div class="sb-eixo" id="sb-eixo"></div>
+    <div class="sb-nome" id="sb-nome"></div>
+    <div class="sb-desc" id="sb-desc"></div>
+    <div class="sb-prog-row">
+      <div class="prog-wrap"><div class="prog-bar" id="pb" style="width:0%"></div></div>
+      <div class="prog-pct" id="pp">0%</div>
+      <div style="display:flex;gap:8px;">
+        <span class="badge b-no" id="bfix">○ Fixas</span>
+        <span class="badge b-no" id="bvar">○ Variáveis</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab on" id="tab-fixas" onclick="goTab(0)"><span class="tab-icon">⭐</span>Ações Fixas<span class="tab-cnt cnt-pending" id="cnt-tab0">0</span></div>
+    <div class="tab"    onclick="goTab(1)"><span class="tab-icon">◆</span>Ações Variáveis<span class="tab-cnt cnt-pending" id="cnt-tab1">0</span></div>
+    <div class="tab" id="tab-specs" onclick="goTab(2)"><span class="tab-icon">🏅</span>Especialidades<span class="tab-cnt cnt-pending" id="cnt-tab2">0</span></div>
+  </div>
+
+  <div class="panels">
+    <div class="panel on" id="p0">
+      <div class="card-list" id="q-fixas"></div>
+    </div>
+    <div class="panel" id="p1">
+      <div class="card-grid" id="q-vars"></div>
+    </div>
+    <div class="panel" id="p2">
+      <div class="ou-sep"><div class="ou-l"></div><div class="ou-t">OU</div><div class="ou-l"></div></div>
+      <div class="ou-note">1 especialidade conquistada substitui as variáveis restantes</div>
+      <div class="spec-grid" id="q-specs"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* ══ MODO MOBILE ══ */
+function detectMobile(){
+  // portrait = mobile
+  if(window.matchMedia){
+    return window.matchMedia('(orientation: portrait)').matches;
+  }
+  return window.innerHeight > window.innerWidth;
+}
+let isMobile = detectMobile();
+let mobActiveTab = 'blocos';
+
+const EIXO_INFO = {
+  e1:{nome:'Habilidades para a Vida', cor:'#c0392b', bg:'#fdf0ee'},
+  e2:{nome:'Meio Ambiente',           cor:'#27ae60', bg:'#eaf8f0'},
+  e3:{nome:'Paz e Desenvolvimento',   cor:'#2980b9', bg:'#edf4ff'},
+  e4:{nome:'Saúde e Bem-Estar',       cor:'#d35400', bg:'#fff4ee'},
+};
+
+function applyMobileMode(){
+  isMobile = detectMobile();
+  document.body.classList.toggle('mobile-mode', isMobile);
+  if(isMobile){
+    mobActiveTab = mobActiveTab || 'home';
+    mobTab(mobActiveTab);
+  } else {
+    var ps = document.querySelectorAll('.mob-panel');
+    for(var i=0;i<ps.length;i++){ps[i].style.display='none';}
+  }
+}
+
+function mobTab(tab){
+  mobActiveTab = tab;
+  var panels = document.querySelectorAll('.mob-panel');
+  for(var i=0;i<panels.length;i++){panels[i].style.display='none';panels[i].classList.remove('mob-active');}
+  var panel = document.getElementById('mob-'+tab);
+  if(panel){panel.style.display='flex';panel.classList.add('mob-active');}
+  var tabs = document.querySelectorAll('.mob-tab');
+  for(var j=0;j<tabs.length;j++){tabs[j].classList.remove('active');}
+  var activeTab = document.getElementById('mnt-'+tab);
+  if(activeTab) activeTab.classList.add('active');
+  if(tab==='home')     renderMobHome();
+  if(tab==='blocos')   renderMobBlocos();
+  if(tab==='etapas')   renderMobEtapas();
+  if(tab==='acolhida') renderMobAcolhida();
+}
+
+function renderMobHome(){
+  // Atualizar nome
+  var nome = localStorage.getItem('lb26_nome')||'';
+  var title = document.getElementById('mob-home-title');
+  if(title) title.textContent = nome ? 'Jornada de '+nome+'!' : 'Minha Jornada!';
+  // Status acolhida
+  var acol = document.getElementById('mob-home-acol-status');
+  if(acol){
+    var done = acolhidaDone.size;
+    var complete = done===ACOLHIDA.length;
+    acol.textContent = complete ? '✓ Concluída!' : done+' / '+ACOLHIDA.length+' feitas';
+    acol.style.background = complete ? 'rgba(42,122,42,.4)' : 'rgba(245,166,35,.3)';
+    acol.style.color = complete ? '#aae8aa' : '#f5e642';
+  }
+  // Status blocos
+  var bSt = document.getElementById('mob-home-blocos-status');
+  if(bSt){
+    var total=18;
+    var conc=Object.keys(BD).filter(id=>calc(id).done).length;
+    bSt.textContent = conc===total ? '✓ Todos concluídos!' : conc+' / '+total+' concluídos';
+    bSt.style.background = conc===total?'rgba(42,122,42,.5)':'rgba(42,122,42,.3)';
+  }
+  // Status etapas
+  var eSt = document.getElementById('mob-home-etapas-status');
+  if(eSt){
+    var nomes=['','Pata Tenra','Saltador','Rastreador','Caçador'];
+    var ultima=0;
+    for(var e=4;e>=1;e--){ if(chosen[e].size>=METAS[e]){ultima=e;break;} }
+    eSt.textContent = ultima===4 ? '✓ Caçador conquistado!' : ultima>0 ? 'Lobo '+nomes[ultima]+' ✓' : 'Nenhuma etapa ainda';
+    eSt.style.background = ultima>0?'rgba(42,144,212,.5)':'rgba(42,144,212,.3)';
+  }
+}
+
+function renderMobBlocos(){
+  var list = document.getElementById('mob-bloco-list');
+  if(!list) return;
+  list.innerHTML='';
+  var eixos = [
+    {cls:'e1', ids:['b1','b2','b3','b4']},
+    {cls:'e2', ids:['b5','b6','b7','b8']},
+    {cls:'e3', ids:['b9','b10','b11','b12','b13']},
+    {cls:'e4', ids:['b14','b15','b16','b17','b18']},
+  ];
+  eixos.forEach(function(eixo){
+    var info = EIXO_INFO[eixo.cls];
+    var hdr = document.createElement('div');
+    hdr.className='mob-eixo-hdr';
+    hdr.style.color=info.cor;
+    hdr.textContent=info.nome;
+    list.appendChild(hdr);
+    eixo.ids.forEach(function(bid){
+      var d=BD[bid]; if(!d) return;
+      var c=calc(bid);
+      var item=document.createElement('button');
+      item.className='mob-bloco-item'
+      item.style.cssText='width:100%;text-align:left;-webkit-appearance:none;'+(c.done?' done-item':'');
+      item.style.borderColor=c.done?info.cor:'transparent';
+      item.innerHTML=
+        '<span class="mob-bloco-icon">'+d.icon+'</span>'+
+        '<div class="mob-bloco-info">'+
+          '<div class="mob-bloco-eixo" style="color:'+info.cor+'">'+info.nome+'</div>'+
+          '<div class="mob-bloco-nome">'+d.nome+'</div>'+
+          '<div class="mob-bloco-prog"><div class="mob-bloco-bar" style="width:'+c.pct+'%;background:'+(c.done?'#2a7a2a':info.cor)+'"></div></div>'+
+          '<div class="mob-bloco-pct" style="color:'+(c.done?'#2a7a2a':info.cor)+'">'+(c.done?'✓ Concluído':c.pct+'%')+'</div>'+
+        '</div>'+
+        '<span class="mob-bloco-check">'+(c.done?'✅':'›')+'</span>';
+      item.onclick=function(){ openSB(bid); };
+      list.appendChild(item);
+    });
+  });
+}
+
+function renderMobEtapas(){
+  var list = document.getElementById('mob-etapas-list');
+  if(!list) return;
+  list.innerHTML='';
+  var etapas=[
+    {e:1,icon:'🐾',nome:'Lobo Pata Tenra', bg:'#fff3d4',cor:'#e6a800'},
+    {e:2,icon:'🌊',nome:'Lobo Saltador',   bg:'#d4eeff',cor:'#2a90d4'},
+    {e:3,icon:'🔍',nome:'Lobo Rastreador', bg:'#fde8d4',cor:'#e05a20'},
+    {e:4,icon:'🏹',nome:'Lobo Caçador',    bg:'#ead4ff',cor:'#8b3fcc'},
+  ];
+  etapas.forEach(function(et){
+    var sel=chosen[et.e];
+    var done=sel.size>=METAS[et.e];
+    var card=document.createElement('div');
+    card.className='mob-etapa-card';
+    card.style.background=et.bg;
+    card.style.borderColor=done?'#2a7a2a':et.cor;
+    var chipsHtml='';
+    if(sel.size===0){
+      chipsHtml='<div class="mob-etapa-empty">Nenhum bloco concluído ainda</div>';
+    } else {
+      sel.forEach(function(id){
+        var icon = iconOf[id]||(BD[id]?BD[id].icon:'');
+        var nome = nomeOf[id]||(BD[id]?BD[id].nome:id);
+        chipsHtml+='<div class="mob-etapa-chip"><span>'+icon+'</span><span>'+nome+'</span></div>';
+      });
+    }
+    card.innerHTML=
+      '<div class="mob-etapa-hdr">'+
+        '<span class="mob-etapa-icon">'+et.icon+'</span>'+
+        '<span class="mob-etapa-nome" style="color:'+et.cor+'">'+et.nome+'</span>'+
+        '<span class="mob-etapa-badge" style="background:'+(done?'#2a7a2a':et.cor)+';color:#fff">'+
+          (done?'Completa ✓':sel.size+'/'+METAS[et.e])+
+        '</span>'+
+      '</div>'+
+      '<div class="mob-etapa-chips">'+chipsHtml+'</div>';
+    list.appendChild(card);
+  });
+}
+
+function renderMobAcolhida(){
+  var list=document.getElementById('mob-acol-list');
+  if(!list) return;
+  list.innerHTML='';
+  var bar=document.getElementById('mob-acol-bar');
+  var lbl=document.getElementById('mob-acol-lbl');
+  var pct=Math.round(acolhidaDone.size/ACOLHIDA.length*100);
+  if(bar) bar.style.width=pct+'%';
+  if(lbl) lbl.textContent=acolhidaDone.size+'/'+ACOLHIDA.length;
+  ACOLHIDA.forEach(function(item){
+    var ck=acolhidaDone.has(item.id);
+    var div=document.createElement('div');
+    div.className='acol-card'+(ck?' ck':'');
+    div.innerHTML='<div class="acol-chk">'+(ck?'✓':'')+'</div><span>'+item.txt+'</span>';
+    div.onclick=function(){
+      acolhidaDone.has(item.id)?acolhidaDone.delete(item.id):acolhidaDone.add(item.id);
+      saveAcolhida();
+      renderMobAcolhida();
+    };
+    list.appendChild(div);
+  });
+}
+
+window.onerror = function(msg, src, line, col, err) {
+  var div = document.createElement('div');
+  div.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:#c0392b;color:#fff;padding:10px 16px;font-family:monospace;font-size:13px;z-index:99999;';
+  div.textContent = '❌ ERRO linha ' + line + ': ' + msg;
+  document.body.appendChild(div);
+  return false;
+};
+
+
+
+/* ══ CONFIGURAÇÕES ══ */
+
+
+function openConfig(){
+  const nome = localStorage.getItem('lb26_nome')||'';
+  document.getElementById('cfg-nome').value = nome;
+  document.getElementById('cfg-modal').classList.add('show');
+  setTimeout(function(){document.getElementById('cfg-nome').focus();}, 300);
+}
+function closeConfig(){
+  document.getElementById('cfg-modal').classList.remove('show');
+}
+function saveConfig(){
+  const nome = document.getElementById('cfg-nome').value.trim();
+  localStorage.setItem('lb26_nome', nome);
+  applyConfig();
+  closeConfig();
+}
+
+function confirmReset(){
+  document.getElementById('cfg-confirm').style.display='flex';
+  document.querySelector('.cfg-reset-btn').style.display='none';
+}
+function cancelReset(){
+  document.getElementById('cfg-confirm').style.display='none';
+  document.querySelector('.cfg-reset-btn').style.display='block';
+}
+function doReset(){
+  // Apagar tudo do localStorage
+  localStorage.removeItem('lb26v2');
+  localStorage.removeItem('lb26_acolhida');
+  // Manter só o nome
+  // Recarregar a página
+  location.reload();
+}
+
+function applyConfig(){
+  const nome = localStorage.getItem('lb26_nome')||'';
+  const el = document.getElementById('wolf-name-display');
+  if(el) el.textContent = nome ? '🐺 '+nome : '';
+  const hdr = document.querySelector('.hdr h1');
+  if(hdr) hdr.textContent = nome ? 'Jornada de '+nome+' na alcateia' : 'Minha jornada na alcateia';
+}
+
+/* ── DADOS ── */
+const BD = {
+  b17:{
+    eixo:'Saúde e Bem-Estar', cor:'#d35400', icon:'🤝', nome:'Vínculos Saudáveis',
+    desc:'Fazer novas amizades, fortalecer os laços com os amigos e aprender a se relacionar de maneira saudável e positiva.',
+    fixas:[
+      {id:'f1',icon:'😄',txt:'Participar com entusiasmo das atividades da alcateia, brincando, conversando e respeitando os lobinhos e os Velhos Lobos.'},
+      {id:'f2',icon:'🤜',txt:'Cumprimentar membros de grupo com a saudação do lobinho e o aperto de mão.'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1',icon:'📖',txt:'Conhecer a história "Como apareceu o medo".'},
+      {id:'v2',icon:'🎬',txt:'Com sua alcateia, ir ao cinema ou teatro, se divertir com outros lobinhos e os Velhos Lobos.'},
+      {id:'v3',icon:'🛑',txt:'Participar de uma atividade sobre bullying e formas para evitar essa prática. Convidar um amigo ou parente para conhecer e participar de uma atividade da alcateia.'},
+      {id:'v4',icon:'👨‍👩‍👧',txt:'Participar de uma atividade da alcateia que conte com a presença das famílias.'},
+      {id:'v5',icon:'💭',txt:'Participar de um jogo ou atividade de expressão de sentimentos.'},
+      {id:'v6',icon:'🌟',txt:'Acolher os novos lobinhos e ajudá-los a se integrar na alcateia.'},
+      {id:'v7',icon:'🔗',txt:'Conhecer as seções do seu grupo escoteiro e participar de uma atividade com outra seção.'},
+      {id:'v8',icon:'🌍',txt:'Participar de uma atividade entre diferentes Unidades Escoteiras ou atividade regional do Ramo Lobinho.'},
+      {id:'v9',icon:'⚜️',txt:'Participar de uma atividade com outra alcateia.'},
+      {id:'v10',icon:'📱',txt:'Manter contato com amigos da alcateia, além da atividade semanal.'},
+    ],
+    specs:['Prevenção ao Bullying'],
+    insignias:[],
+  },
+  b15:{
+    eixo:'Saúde e Bem-Estar', cor:'#d35400', icon:'🧠', nome:'Saúde Mental',
+    desc:'Adotar hábitos que ajudam a equilibrar sua saúde mental, buscando momentos de relaxamento, diversão e bem-estar, tanto para si quanto para os outros.',
+    fixas:[],
+    varQtd:4,
+    vars:[
+      {id:'v1',icon:'🎨',txt:'Representar de maneira artística, com a sua alcateia, quais emoções está sentindo e que coisas te deixam feliz.'},
+      {id:'v2',icon:'🤝',txt:'Ajudar um amigo com alguma dificuldade e relatar a experiência a um Velho Lobo.'},
+      {id:'v3',icon:'💬',txt:'Elogiar os lobinhos da alcateia e agradecer pela ajuda recebida.'},
+      {id:'v4',icon:'🆘',txt:'Saber a quem pedir ajuda quando sentir que algo está incomodando.'},
+      {id:'v5',icon:'🌳',txt:'Propor momentos divertidos e de relaxamento com a sua família, como ir ao parque, praticar esportes, ler um livro, montar um quebra-cabeça etc. e relatar para os Velhos Lobos como foi essa experiência.'},
+      {id:'v6',icon:'⭐',txt:'Identificar suas atividades favoritas e separar um tempo para praticá-las.'},
+      {id:'v7',icon:'😊',txt:'Praticar uma atividade que te faça sentir feliz e relaxado, encaixando na sua rotina e vendo quanto tempo gasta em suas atividades diárias.'},
+      {id:'vs1', icon:'🏅',txt:'Canto', isSpecVar:true},
+      {id:'vs2', icon:'🏅',txt:'Coleções', isSpecVar:true},
+      {id:'vs3', icon:'🏅',txt:'Cubo Mágico', isSpecVar:true},
+      {id:'vs4', icon:'🏅',txt:'Expressão Musical', isSpecVar:true},
+      {id:'vs5', icon:'🏅',txt:'Ioiô', isSpecVar:true},
+      {id:'vs6', icon:'🏅',txt:'Jogos de Cartas Colecionáveis', isSpecVar:true},
+      {id:'vs7', icon:'🏅',txt:'Jogos de Tabuleiro', isSpecVar:true},
+      {id:'vs8', icon:'🏅',txt:'Mágica e Ilusionismo', isSpecVar:true},
+      {id:'vs9', icon:'🏅',txt:'Pipas', isSpecVar:true},
+      {id:'vs10',icon:'🏅',txt:'Plastimodelismo', isSpecVar:true},
+      {id:'vs11',icon:'🏅',txt:'Quebra-Cabeças', isSpecVar:true},
+      {id:'vs12',icon:'🏅',txt:'RPG', isSpecVar:true},
+      {id:'vs13',icon:'🏅',txt:'Xadrez', isSpecVar:true},
+    ],
+    specs:['Prevenção aos Vícios'],
+    insignias:[],
+  },
+  b14:{
+    eixo:'Saúde e Bem-Estar', cor:'#d35400', icon:'🥗', nome:'Hábitos Saudáveis',
+    desc:'Cuidar de si mesmo, praticando atividades físicas, mantendo uma alimentação saudável e garantindo a higiene pessoal e do ambiente ao seu redor.',
+    fixas:[
+      {id:'f1',icon:'🍲',txt:'Auxiliar na preparação de uma refeição saudável em um acampamento ou acantonamento da alcateia e experimentá-la.'},
+      {id:'f2',icon:'🥗',txt:'Preparar um lanche saudável para uma caçada, contendo pelo menos três tipos de legumes e dois tipos de frutas.'},
+      {id:'f3',icon:'🥾',txt:'Participar de pelo menos uma caminhada ao ar livre com a alcateia (entre 2 e 5 km) registrando três observações sobre o local durante o percurso.'},
+      {id:'fm1',icon:'⛵',txt:'Saber remar em bote ou canoa, demonstrando embarque e desembarque.', modalidade:'mar'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1', icon:'👕',txt:'Utilizar o vestuário ou uniforme de lobinho adequadamente, demonstrando aplicação correta dos distintivos.'},
+      {id:'v2', icon:'🥦',txt:'Participar de atividades que demonstrem a importância de uma boa alimentação para a saúde, consumindo alimentos variados e cuidando da higiene.'},
+      {id:'v3', icon:'⚽',txt:'Escolher um esporte, aprender sobre ele e praticá-lo. Contar para a alcateia sobre o esporte que você pratica, suas características e regras.'},
+      {id:'v4', icon:'🧼',txt:'Cuidar da limpeza do corpo, manter uma boa rotina de sono, alimentação e brincadeiras e dedicar um tempo adequado aos estudos.'},
+      {id:'v5', icon:'🛏️',txt:'Manter seu quarto e pertences em ordem.'},
+      {id:'v6', icon:'🍽️',txt:'Fazer refeições saudáveis nos horários estabelecidos por sua família.'},
+      {id:'v7', icon:'🐺',txt:'Conhecer Bagheera e entender como ela ensina a viver de forma saudável.'},
+      {id:'v8', icon:'🔥',txt:'Preparar um espetinho com pelo menos quatro legumes diferentes e assá-lo em uma fogueira para seu consumo.'},
+      {id:'vs1', icon:'🏅',txt:'Artes Marciais', isSpecVar:true},
+      {id:'vs2', icon:'🏅',txt:'Canoagem', isSpecVar:true},
+      {id:'vs3', icon:'🏅',txt:'Ciclismo', isSpecVar:true},
+      {id:'vs4', icon:'🏅',txt:'Corrida de Rua', isSpecVar:true},
+      {id:'vs5', icon:'🏅',txt:'Culinária Vegetariana', isSpecVar:true},
+      {id:'vs6', icon:'🏅',txt:'Cuidados Bucais', isSpecVar:true},
+      {id:'vs7', icon:'🏅',txt:'Dança', isSpecVar:true},
+      {id:'vs8', icon:'🏅',txt:'Desportos Inclusivos', isSpecVar:true},
+      {id:'vs9', icon:'🏅',txt:'Esportes de Quadra', isSpecVar:true},
+      {id:'vs10',icon:'🏅',txt:'Futebol', isSpecVar:true},
+      {id:'vs11',icon:'🏅',txt:'Ginásticas', isSpecVar:true},
+      {id:'vs12',icon:'🏅',txt:'Hipismo', isSpecVar:true},
+      {id:'vs13',icon:'🏅',txt:'Mergulho', isSpecVar:true},
+      {id:'vs14',icon:'🏅',txt:'Natação', isSpecVar:true},
+      {id:'vs15',icon:'🏅',txt:'Patinação', isSpecVar:true},
+      {id:'vs16',icon:'🏅',txt:'Plantas Medicinais', isSpecVar:true},
+      {id:'vs17',icon:'🏅',txt:'Remo', isSpecVar:true},
+      {id:'vs18',icon:'🏅',txt:'Skateboard', isSpecVar:true},
+      {id:'vs19',icon:'🏅',txt:'Slackline', isSpecVar:true},
+      {id:'vs20',icon:'🏅',txt:'Técnicas Verticais', isSpecVar:true},
+      {id:'vs21',icon:'🏅',txt:'Tênis', isSpecVar:true},
+      {id:'vs22',icon:'🏅',txt:'Tênis de Mesa', isSpecVar:true},
+      {id:'vs23',icon:'🏅',txt:'Tiro com Arco', isSpecVar:true},
+      {id:'vs24',icon:'🏅',txt:'Triatlo', isSpecVar:true},
+      {id:'vs25',icon:'🏅',txt:'Vela', isSpecVar:true},
+      {id:'vs26',icon:'🏅',txt:'Yoga', isSpecVar:true},
+    ],
+    specs:['Noções Desportivas','Nutrição'],
+    insignias:[],
+  },
+  b18:{
+    eixo:'Saúde e Bem-Estar', cor:'#d35400', icon:'✨', nome:'Espiritualidade',
+    desc:'Descobrir e respeitar diferentes crenças espirituais em sua comunidade, expressando sua própria fé com respeito e bondade no ambiente familiar e entre amigos.',
+    fixas:[],
+    varQtd:4,
+    vars:[
+      {id:'v1',icon:'🙏',txt:'Realizar orações de agradecimento ou momento de reflexão nas atividades da alcateia.'},
+      {id:'v2',icon:'🎨',txt:'Representar artisticamente um símbolo de sua religião e explicá-lo à alcateia.'},
+      {id:'v3',icon:'⛪',txt:'Participar das celebrações e compromissos com sua crença ou religião regularmente.'},
+      {id:'v4',icon:'📖',txt:'Durante um momento de reflexão, fazer a leitura de um texto de sua crença ou religião.'},
+      {id:'v5',icon:'🌿',txt:'Participar de uma atividade que expressa gratidão sobre coisas da vida e da natureza.'},
+      {id:'v6',icon:'🌀',txt:'Criar uma mandala com elementos da natureza, representando a união e harmonia, e explicar a importância de cada elemento.'},
+    ],
+    specs:['Diálogo inter-religioso'],
+    insignias:[
+      {id:'i1',txt:'Yoga'},
+    ],
+  },
+  b16:{
+    eixo:'Saúde e Bem-Estar', cor:'#d35400', icon:'💪', nome:'Cuidado com o Corpo',
+    desc:'Conhecer seu corpo, entender as diferenças entre as pessoas e realizar atividades que desenvolvam sua agilidade, força e flexibilidade. Conhecer técnicas básicas de primeiros socorros para ajudar em situações simples.',
+    fixas:[
+      {id:'f1',icon:'🩹',txt:'Saber realizar os primeiros socorros em cortes, queimaduras e outros pequenos ferimentos.'},
+      {id:'f2',icon:'🩺',txt:'Saber utilizar ataduras e tipóias.'},
+      {id:'f3',icon:'🌡️',txt:'Saber usar um termômetro.'},
+      {id:'f4',icon:'🦺',txt:'Cuidar de sua segurança e dos demais nas atividades da alcateia, segundo as orientações dos Velhos Lobos.'},
+    ],
+    varQtd:4,
+    vars:[
+      {id:'v1',icon:'🧍',txt:'Em atividades da alcateia, mostrar que conhece os limites do próprio corpo e dos demais, respeitando a privacidade de cada um.'},
+      {id:'v2',icon:'💊',txt:'Participar de atividades voltadas à prevenção das doenças mais comuns na infância (viroses, febre, gripe, dengue, catapora, caxumba, sarampo etc.), identificando seus sintomas e aprendendo formas de prevenção.'},
+      {id:'v3',icon:'☀️',txt:'Proteger-se do calor e do frio nas atividades da alcateia, utilizando boné, protetor solar, blusas para o frio, beber água e respeitar os limites do seu corpo.'},
+      {id:'v4',icon:'🌳',txt:'Realizar atividades físicas desafiadoras como passar por uma falsa baiana, subir em uma árvore, dar cambalhota ou fazer estrela.'},
+      {id:'v5',icon:'🎮',txt:'Participar do jogo de Kim, acertar a maioria dos objetos usando visão, audição, tato, olfato ou paladar.'},
+      {id:'v6',icon:'🧰',txt:'Conhecer e saber utilizar os recursos da caixa de primeiros socorros da alcateia.'},
+      {id:'v7',icon:'📋',txt:'Fazer um checklist de segurança para a próxima atividade ao ar livre (hidratação, protetor, boné, calçado).'},
+      {id:'v8',icon:'📞',txt:'Simular como pedir ajuda: quem chamar, o que dizer, onde estamos e como manter a calma.'},
+      {id:'vs1',icon:'🏅',txt:'Babá', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'Cuidados com Idosos', isSpecVar:true},
+      {id:'vs3',icon:'🏅',txt:'Vigilância Epidemiológica', isSpecVar:true},
+      {id:'vs4',icon:'🏅',txt:'Salvamento', isSpecVar:true},
+      {id:'vs5',icon:'🏅',txt:'Segurança', isSpecVar:true},
+    ],
+    specs:['Anatomia Humana','Prevenção em Saúde','Primeiros Socorros'],
+    insignias:[],
+  },
+  b13:{
+    eixo:'Paz e Desenvolvimento', cor:'#2980b9', icon:'💛', nome:'Valores',
+    desc:'Agir sempre de acordo com os valores da Promessa do Lobinho, sendo amigo, leal e prestativo com todos ao seu redor.',
+    fixas:[
+      {id:'f1',icon:'🐯',txt:'Ouvir a história "Tigre Tigre" e comparar a conduta de Mowgli com a sua Promessa de Lobinho.'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1',icon:'⭐',txt:'Contar a um Velho Lobo sobre três boas ações que praticou.'},
+      {id:'v2',icon:'📜',txt:'Explicar o significado da Lei e da Promessa do Lobinho a um novo lobinho na alcateia.'},
+      {id:'v3',icon:'🤝',txt:'Ensinar aos novos membros da alcateia o aperto de mão e a Saudação do Lobinho.'},
+      {id:'v4',icon:'🎮',txt:'Participar com a alcateia de jogos distintos, respeitando as suas regras e agindo com cordialidade.'},
+      {id:'v5',icon:'✏️',txt:'Escrever ou desenhar uma história sobre uma situação em que agiu conforme os ensinamentos da Lei e da Promessa do Lobinho.'},
+      {id:'v6',icon:'🐻',txt:'Saber quem é Baloo e o motivo dele ensinar a viver de acordo com a Lei da Jângal.'},
+      {id:'v7',icon:'📋',txt:'Discutir com um Velho Lobo as principais regras dos locais onde convive, compreendendo a importância do respeito.'},
+      {id:'vs1',icon:'🏅',txt:'Fogo de Conselho', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'História do Escotismo', isSpecVar:true},
+    ],
+    specs:['Escotismo Mundial'],
+    insignias:[],
+  },
+  b9:{
+    eixo:'Paz e Desenvolvimento', cor:'#2980b9', icon:'🕊️', nome:'Promoção da Paz',
+    desc:'Participar de atividades que promovem a paz e o respeito entre as pessoas, aprendendo a conviver com diferentes crenças e formas de pensar.',
+    fixas:[
+      {id:'f1',icon:'📚',txt:'Ouvir as histórias "Flor Vermelha" e "Irmãos de Mowgli", do Livro da Jângal.'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1',icon:'🕊️',txt:'Participar de jogos e atividades relacionados ao diálogo e a cultura de paz.'},
+      {id:'v2',icon:'🛕',txt:'Visitar um templo de uma religião diferente da sua e, após a visita, expressar suas impressões por meio de um desenho ou depoimento.'},
+      {id:'v3',icon:'🌍',txt:'Organizar e apresentar um jogo tradicional de outro país, promovendo troca cultural e cooperação.'},
+      {id:'v4',icon:'⚜️',txt:'Visitar outra UEL e refletir sobre o que é a Fraternidade Escoteira.'},
+      {id:'v5',icon:'🎉',txt:'Participar de uma "feira cultural" com comidas, músicas, danças e vestimentas típicas de diferentes países, envolvendo a matilha e as famílias ou responsáveis.'},
+      {id:'v6',icon:'🎨',txt:'Criar com sua alcateia um mural sobre as religiões do mundo, expressando artisticamente as principais características (símbolos, datas comemorativas etc).'},
+      {id:'v7',icon:'🪔',txt:'Conhecer uma festa ou celebração de uma religião diferente da sua e apresentar para sua alcateia.'},
+      {id:'v8',icon:'🎭',txt:'Apresentar com a alcateia, em uma Flor Vermelha, um esquete sobre a cultura de outro país.'},
+      {id:'v9',icon:'📅',txt:'Registrar no calendário as celebrações religiosas e as festividades das crenças ou religiões dos membros da alcateia.'},
+      {id:'vs1',icon:'🏅',txt:'Geografia', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'História Mundial', isSpecVar:true},
+      {id:'vs3',icon:'🏅',txt:'Inclusão', isSpecVar:true},
+      {id:'vs4',icon:'🏅',txt:'Libras', isSpecVar:true},
+      {id:'vs5',icon:'🏅',txt:'Línguas', isSpecVar:true},
+      {id:'vs6',icon:'🏅',txt:'Paz e Justiça', isSpecVar:true},
+    ],
+    specs:[],
+    insignias:[
+      {id:'i1',txt:'Insígnia da Lusofonia'},
+      {id:'i2',txt:'Insígnia do Cone-Sul'},
+      {id:'i3',txt:'Diálogos pela Paz'},
+    ],
+  },
+  b10:{
+    eixo:'Paz e Desenvolvimento', cor:'#2980b9', icon:'🏛️', nome:'Herança Cultural',
+    desc:'Descobrir e valorizar a cultura da sua comunidade e do seu país, explorando histórias, tradições e costumes em atividades divertidas.',
+    fixas:[
+      {id:'f1',icon:'🚩',txt:'Realizar o hasteamento ou arriamento da Bandeira Nacional em cerimônia de abertura ou de encerramento de atividade.'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1', icon:'📸',txt:'Criar um álbum com fotos (ou desenhos), histórias e tradições familiares ou de onde vive.'},
+      {id:'v2', icon:'🎵',txt:'Aprender e cantar o Hino Nacional Brasileiro com a alcateia e conhecer os elementos e o simbolismo da Bandeira Nacional, demonstrando respeito por estes símbolos.'},
+      {id:'v3', icon:'🎭',txt:'Contar ou encenar, em uma Flor Vermelha, a história de uma pessoa que teve destaque na história do Brasil ou da sua cidade.'},
+      {id:'v4', icon:'🌿',txt:'Participar de atividades sobre a cultura popular brasileira.'},
+      {id:'v5', icon:'🏛️',txt:'Visitar um museu histórico com a alcateia e contar o que mais chamou à atenção.'},
+      {id:'v6', icon:'🍽️',txt:'Preparar e degustar, com a sua alcateia, uma receita típica de sua cidade ou região.'},
+      {id:'v7', icon:'🎮',txt:'Reproduzir jogos e brincadeiras típicas de diferentes épocas ou culturas, como amarelinha ou pião.'},
+      {id:'v8', icon:'👴',txt:'Conversar com avós ou membros mais velhos da comunidade sobre histórias do passado.'},
+      {id:'v9', icon:'🎪',txt:'Participar de feiras, festas ou eventos que celebrem tradições locais.'},
+      {id:'v10',icon:'🧶',txt:'Aprender alguma técnica de artesanato local e produzir um presente.'},
+      {id:'v11',icon:'🎶',txt:'Apresentar uma canção, dança ou brincadeira folclórica do Brasil em uma Flor Vermelha.'},
+      {id:'vs1', icon:'🏅',txt:'Anime', isSpecVar:true},
+      {id:'vs2', icon:'🏅',txt:'Arqueologia', isSpecVar:true},
+      {id:'vs3', icon:'🏅',txt:'Arte da Marinharia', isSpecVar:true},
+      {id:'vs4', icon:'🏅',txt:'Artes Cênicas', isSpecVar:true},
+      {id:'vs5', icon:'🏅',txt:'Capoeira', isSpecVar:true},
+      {id:'vs6', icon:'🏅',txt:'Civilizações da Antiguidade', isSpecVar:true},
+      {id:'vs7', icon:'🏅',txt:'Cosplay', isSpecVar:true},
+      {id:'vs8', icon:'🏅',txt:'Culinária Típica', isSpecVar:true},
+      {id:'vs9', icon:'🏅',txt:'Danças Folclóricas', isSpecVar:true},
+      {id:'vs10',icon:'🏅',txt:'História Aeroespacial', isSpecVar:true},
+      {id:'vs11',icon:'🏅',txt:'História da Aviação', isSpecVar:true},
+      {id:'vs12',icon:'🏅',txt:'História Brasileira', isSpecVar:true},
+      {id:'vs13',icon:'🏅',txt:'História da Arte', isSpecVar:true},
+      {id:'vs14',icon:'🏅',txt:'História do Escotismo', isSpecVar:true},
+      {id:'vs15',icon:'🏅',txt:'História Local', isSpecVar:true},
+      {id:'vs16',icon:'🏅',txt:'História Marítima', isSpecVar:true},
+      {id:'vs17',icon:'🏅',txt:'Literatura', isSpecVar:true},
+      {id:'vs18',icon:'🏅',txt:'Mitologias', isSpecVar:true},
+      {id:'vs19',icon:'🏅',txt:'Museologia', isSpecVar:true},
+      {id:'vs20',icon:'🏅',txt:'Origami', isSpecVar:true},
+      {id:'vs21',icon:'🏅',txt:'Paleontologia', isSpecVar:true},
+      {id:'vs22',icon:'🏅',txt:'Poesia', isSpecVar:true},
+      {id:'vs23',icon:'🏅',txt:'Tradições dos Povos Indígenas', isSpecVar:true},
+    ],
+    specs:['Brasilidades','Genealogia','Informações Turísticas','Tradições dos Povos Indígenas'],
+    insignias:[],
+  },
+  b11:{
+    eixo:'Paz e Desenvolvimento', cor:'#2980b9', icon:'🗳️', nome:'Democracia',
+    desc:'Ajudar na tomada de decisões em grupo, respeitando as escolhas coletivas e colaborando para que todos sejam ouvidos.',
+    fixas:[
+      {id:'f1',icon:'🗣️',txt:'Participar ativamente de uma Roca de Conselho, expressando opiniões de forma respeitosa.'},
+      {id:'f2',icon:'📖',txt:'Conhecer a história "Caçadas de Kaa" e discutir com os companheiros a conduta dos personagens.'},
+      {id:'f3',icon:'🗳️',txt:'Participar da eleição de primo e segundo da matilha e combinar suas responsabilidades.'},
+    ],
+    varQtd:2,
+    vars:[
+      {id:'v1',icon:'🏛️',txt:'Visitar a câmara dos vereadores ou prefeitura, discutindo com os Velhos Lobos o que aprendeu.'},
+      {id:'v2',icon:'📋',txt:'Participar de um fórum de grupo escoteiro.'},
+      {id:'v3',icon:'💬',txt:'Participar de um debate com a alcateia, sobre um tema de interesse dos lobinhos.'},
+      {id:'v4',icon:'🎮',txt:'Participar de um jogo democrático com a alcateia.'},
+      {id:'v5',icon:'✍️',txt:'Participar da criação de um "acordo de convivência" da alcateia (ou conhecê-lo) e assiná-lo.'},
+      {id:'vs1',icon:'🏅',txt:'Prevenção de Fake News', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'Geografia', isSpecVar:true},
+      {id:'vs3',icon:'🏅',txt:'Paz e Justiça', isSpecVar:true},
+    ],
+    specs:[],
+    insignias:[],
+  },
+  b12:{
+    eixo:'Paz e Desenvolvimento', cor:'#2980b9', icon:'🌍', nome:'Comunidade',
+    desc:'Praticar boas ações diariamente, seja em casa, na escola ou na comunidade, contribuindo para tornar o mundo um lugar melhor.',
+    fixas:[
+      {id:'f1',icon:'🤝',txt:'Identificar, com sua alcateia, uma necessidade da UEL e participar de uma ação coletiva de melhoria.'},
+      {id:'f2',icon:'🏥',txt:'Conhecer os hospitais próximos à sua casa e os contatos de emergência (Bombeiros, SAMU, Polícia).'},
+    ],
+    varQtd:3,
+    vars:[
+      {id:'v1',icon:'❤️',txt:'Participar ativamente com sua alcateia ou grupo escoteiro, de uma campanha de ajuda ao próximo.'},
+      {id:'v2',icon:'🏠',txt:'Visitar um lar de idosos, creche ou entidade assistencial, prestando apoio conforme necessidade.'},
+      {id:'v3',icon:'⭐',txt:'Identificar uma forma de praticar uma Boa Ação e realizá-la.'},
+      {id:'v4',icon:'🔍',txt:'Conhecer ações solidárias realizadas por instituições de sua comunidade.'},
+      {id:'v5',icon:'✉️',txt:'Preparar e entregar cartinhas, desenhos ou mensagens de carinho para pessoas em hospitais ou instituições.'},
+      {id:'v6',icon:'🐾',txt:'Participar de uma ação de apoio a animais, como arrecadação de ração para abrigos.'},
+      {id:'v7',icon:'🎁',txt:'Com a ajuda de sua família, separar brinquedos ou roupas em bom estado para doação e relatar para onde foram.'},
+      {id:'vs1',icon:'🏅',txt:'Inclusão', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'Libras', isSpecVar:true},
+    ],
+    specs:['Defesa Civil'],
+    insignias:[
+      {id:'i1',txt:'Mensageiros da Paz'},
+      {id:'i2',txt:'Insígnia da Boa Ação'},
+    ],
+  },
+  b8:{
+    eixo:'Meio Ambiente', cor:'#27ae60', icon:'🏕️', nome:'Vida ao Ar Livre',
+    desc:'Aproveitar as atividades ao ar livre com responsabilidade, sempre cuidando da natureza e deixando os lugares melhores do que o encontrado.',
+    fixas:[
+      {id:'f1',icon:'🌿',txt:'Explorar a fauna e a flora local em uma atividade com a alcateia, compreendendo a importância da preservação.'},
+      {id:'f2',icon:'🪢',txt:'Aplicar os seguintes nós: direito, escota alceado, aselha, de correr e volta do fiel, sabendo suas funções, durante um acampamento com a alcateia.'},
+      {id:'f3',icon:'⛺',txt:'Montar, pernoitar, desmontar e acondicionar corretamente a barraca durante um acampamento.'},
+      {id:'f4',icon:'🔥',txt:'Acender uma pequena fogueira para fazer uma bebida quente ou lanche, demonstrando as técnicas de segurança no uso de fósforos e acendedores, em um acampamento com a alcateia.'},
+      {id:'f5',icon:'🧭',txt:'Conhecer a Rosa dos Ventos e a constelação do Cruzeiro do Sul, usando-os para sua orientação.'},
+      {id:'f6',icon:'🍳',txt:'Participar de pelo menos dois acampamentos ou acantonamentos com a alcateia. Cozinhar um prato de comida mateira com a alcateia.'},
+    ],
+    varQtd:4,
+    vars:[
+      {id:'v1',icon:'🏃',txt:'Percorrer uma pista de obstáculos em uma atividade da alcateia.'},
+      {id:'v2',icon:'🌲',txt:'Participar de caçadas ao ar livre com a alcateia, seguindo as regras de etiqueta e de segurança para trilhas.'},
+      {id:'v3',icon:'🎮',txt:'Participar de jogos ao ar livre com a alcateia.'},
+      {id:'v4',icon:'👂',txt:'Em uma caminhada com a alcateia, observar a natureza, identificar diferentes sons e agradecer por sua existência.'},
+      {id:'vs1',icon:'🏅',txt:'Corrida de Orientação', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'Culinária Mateira', isSpecVar:true},
+      {id:'vs3',icon:'🏅',txt:'Escalada', isSpecVar:true},
+      {id:'vs4',icon:'🏅',txt:'Espeleoturismo', isSpecVar:true},
+      {id:'vs5',icon:'🏅',txt:'Ferramentas de Corte', isSpecVar:true},
+      {id:'vs6',icon:'🏅',txt:'Lenhador', isSpecVar:true},
+      {id:'vs7',icon:'🏅',txt:'Mountain Bike', isSpecVar:true},
+      {id:'vs8',icon:'🏅',txt:'Pesca', isSpecVar:true},
+      {id:'vs9',icon:'🏅',txt:'Rastreamento', isSpecVar:true},
+    ],
+    specs:['Acampamento','Excursões','Montanhismo','Pioneiria','Sobrevivência'],
+    insignias:[],
+  },
+  b5:{
+    eixo:'Meio Ambiente', cor:'#27ae60', icon:'🌡️', nome:'Mudanças Climáticas',
+    desc:'Cuidar do planeta adotando hábitos que ajudam a reduzir os impactos das mudanças climáticas no dia a dia.',
+    fixas:[],
+    varQtd:4,
+    vars:[
+      {id:'v1',icon:'🌦️',txt:'Reconhecer na natureza os sinais de mudança do tempo.'},
+      {id:'v2',icon:'🌱',txt:'Cultivar uma horta sozinho ou com a alcateia, promovendo o cuidado com a natureza.'},
+      {id:'v3',icon:'💧',txt:'Realizar uma experiência de condensação do vapor da água, relacionando-a com as nuvens e as chuvas.'},
+      {id:'v4',icon:'🔍',txt:'Participar de uma caçada urbana para identificar práticas prejudiciais e sustentáveis para a natureza, e sugerir soluções.'},
+      {id:'v5',icon:'🌳',txt:'Participar de um plantio de árvores em áreas urbanas e discutir com os Velhos Lobos sobre a importância da arborização.'},
+      {id:'v6',icon:'💬',txt:'Conversar com os Velhos Lobos sobre como as ações cotidianas afetam as mudanças climáticas.'},
+      {id:'v7',icon:'⚡',txt:'Visitar um local que use energia renovável para entender seu impacto.'},
+      {id:'v8',icon:'🏠',txt:'Ser bem avaliado pelos pais e responsáveis sobre o consumo consciente de água e energia elétrica em casa.'},
+      {id:'v9',icon:'☁️',txt:'Em uma atividade ao ar livre, observar as nuvens no céu, reconhecendo diferentes aparências e altitudes.', modalidade:'ar'},
+      {id:'vs1',icon:'🏅',txt:'Energia', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'Agricultura', isSpecVar:true},
+      {id:'vs3',icon:'🏅',txt:'Jardinagem e Paisagismo', isSpecVar:true},
+    ],
+    specs:['Meteorologia'],
+    insignias:[
+      {id:'i1',txt:'Escoteiros pela Energia Solar'},
+    ],
+  },
+  b7:{
+    eixo:'Meio Ambiente', cor:'#27ae60', icon:'🦋', nome:'Preservação da Biodiversidade',
+    desc:'Usar apenas o necessário, evitando desperdícios e consumindo de forma consciente para preservar os recursos naturais.',
+    fixas:[
+      {id:'f1',icon:'🌿',txt:'Explorar a fauna e a flora local em uma atividade com a alcateia, compreendendo a importância da preservação.'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1', icon:'🌱',txt:'Cuidar de uma planta ou de um animal de estimação em casa, demonstrando estes cuidados para a alcateia.'},
+      {id:'v2', icon:'🗺️',txt:'Em uma atividade ao ar livre com a alcateia, identificar as características da região onde mora, como relevo, clima, hidrografia, bioma, fauna e flora.'},
+      {id:'v3', icon:'📓',txt:'Criar um "diário da biodiversidade", registrando plantas, animais e insetos encontrados na vizinhança.'},
+      {id:'v4', icon:'🧹',txt:'Participar, com a alcateia, da limpeza de praias, rios ou parques.'},
+      {id:'v5', icon:'🦒',txt:'Visitar um zoológico, jardim botânico, abrigo de animais, horto florestal, viveiro de plantas ou propriedade rural de produção agrícola.'},
+      {id:'v6', icon:'🌸',txt:'Plantar flores que atraem abelhas e borboletas, discutindo com os Velhos Lobos sobre o papel desses insetos na reprodução das plantas.'},
+      {id:'v7', icon:'📚',txt:'Ler ou ouvir histórias sobre animais em ameaça de extinção, florestas e a importância dos ecossistemas e explicar a um Velho Lobo.'},
+      {id:'v8', icon:'🐦',txt:'Montar comedouros simples para atrair aves para o quintal/varanda ou para a UEL.'},
+      {id:'v9', icon:'🐠',txt:'Criar ecossistemas em miniatura, como terrários ou aquários, e observar a convivência entre os seres.'},
+      {id:'v10',icon:'🔍',txt:'Pesquisar um animal nativo ameaçado da região, fazer um cartaz para a alcateia e sugerir como ajudar sua preservação.'},
+      {id:'vs1',icon:'🏅',txt:'Animais Venenosos e Peçonhentos', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'Aquarismo', isSpecVar:true},
+      {id:'vs3',icon:'🏅',txt:'Biologia', isSpecVar:true},
+      {id:'vs4',icon:'🏅',txt:'Cuidados com Animais de Estimação', isSpecVar:true},
+      {id:'vs5',icon:'🏅',txt:'Entomologia', isSpecVar:true},
+      {id:'vs6',icon:'🏅',txt:'Geologia', isSpecVar:true},
+      {id:'vs7',icon:'🏅',txt:'Meliponicultura', isSpecVar:true},
+      {id:'vs8',icon:'🏅',txt:'Microbiologia', isSpecVar:true},
+    ],
+    specs:['Ciências da Terra','Zoologia','Oceanologia','Botânica'],
+    insignias:[
+      {id:'i1',txt:'Campeões da Natureza'},
+    ],
+  },
+  b6:{
+    eixo:'Meio Ambiente', cor:'#27ae60', icon:'♻️', nome:'Consumo Responsável',
+    desc:'Usar apenas o necessário, evitando desperdícios e consumindo de forma consciente para preservar os recursos naturais.',
+    fixas:[
+      {id:'f1',icon:'🧺',txt:'Participar de um piquenique, excursão ou acampamento com a alcateia, sem a utilização de plásticos descartáveis.'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1',icon:'🗑️',txt:'Separar e classificar materiais para coleta seletiva do lixo em casa.'},
+      {id:'v2',icon:'🏷️',txt:'Observar os rótulos e as embalagens dos produtos usados no dia a dia, entender sua origem e destino, e conversar com os Velhos Lobos sobre o tema.'},
+      {id:'v3',icon:'🧵',txt:'Conservar roupas ou brinquedos com a ajuda de adultos.'},
+      {id:'v4',icon:'💡',txt:'Adotar diariamente práticas sustentáveis, como apagar luzes, separar o lixo e reduzir o uso de plástico, motivando o seu entorno a fazer o mesmo.'},
+      {id:'v5',icon:'🥦',txt:'Escolher frutas e vegetais da estação e produzidos localmente e utilizá-los em um lanche coletivo da alcateia.'},
+      {id:'v6',icon:'🍽️',txt:'Nas refeições, colocar apenas a quantidade de comida que vai consumir e aproveitar as sobras quando possível.'},
+      {id:'v7',icon:'🎁',txt:'Selecionar brinquedos e roupas em bom estado e doar para uma campanha, ação comunitária ou instituição de caridade.'},
+      {id:'v8',icon:'📓',txt:'Reutilizar cadernos com folhas sobrando e outros materiais escolares, como mochilas ou estojos em bom estado.'},
+      {id:'v9', icon:'🎒',txt:'Cuidar dos materiais da sua alcateia.'},
+      {id:'v10',icon:'💧',txt:'Evitar desperdício de água, fechando a torneira ao escovar os dentes ou lavar a louça e reduzindo o tempo de banho, sem ficar com a água ligada sem necessidade.'},
+      {id:'vm1',icon:'✈️',txt:'Fazer um modelo de aeronave à sua escolha (avião, helicóptero, foguete, drone, balão etc.), reutilizando materiais e embalagens que seriam descartados.', modalidade:'ar'},
+      {id:'vs1',icon:'🏅',txt:'Agricultura', isSpecVar:true},
+      {id:'vs2',icon:'🏅',txt:'Aquicultura', isSpecVar:true},
+      {id:'vs3',icon:'🏅',txt:'Energia', isSpecVar:true},
+    ],
+    specs:['Horticultura'],
+    insignias:[
+      {id:'i1',txt:'Reduzir, Reciclar, Reutilizar'},
+    ],
+  },
+  b4:{
+    eixo:'Habilidades para a Vida', cor:'#c0392b', icon:'🧭', nome:'Autonomia e Liderança',
+    desc:'Participar das atividades com responsabilidade, cumprindo com suas tarefas e ajudando sempre que possível. Refletir sobre suas experiências, fazer escolhas conscientes e aprender a usar o dinheiro de forma responsável no dia a dia.',
+    fixas:[
+      {id:'f1',icon:'🎒',txt:'Organizar os materiais individuais e arrumar sua mochila para um acampamento de alcateia.'},
+    ],
+    varQtd:4,
+    vars:[
+      {id:'v1',icon:'📋',txt:'Avaliar as atividades das quais participou, identificando pontos positivos e negativos e sugerindo melhorias.'},
+      {id:'v2',icon:'🛒',txt:'Fazer uma compra e prestar contas do pagamento.'},
+      {id:'v3',icon:'🗺️',txt:'Conhecer os meios de transporte, farmácias, correios, hospitais, supermercados, pontos de ônibus/estações de trem/metrô, igrejas e parques próximos à sua casa.'},
+      {id:'v4',icon:'💰',txt:'Participar de uma atividade sobre o uso do dinheiro de forma responsável.'},
+      {id:'v5',icon:'⚠️',txt:'Identificar riscos domésticos (facas, fogo, eletricidade, gás, janelas etc.) e realizar uma ação para prevenir acidentes (cartaz, panfleto, entre outros).'},
+      {id:'v6',icon:'📊',txt:'Registrar em um quadro ou tabela simples como usou o dinheiro da mesada.'},
+    ],
+    specs:['Empreendedorismo','Educação Financeira','Administração','Reparos Domésticos','Oratória'],
+  },
+  b3:{
+    eixo:'Habilidades para a Vida', cor:'#c0392b', icon:'📚', nome:'Aprendizagem Contínua',
+    desc:'Se interessar por diversos temas, aprender com diferentes pessoas e consultar várias fontes para ampliar seu conhecimento, explorando novas ideias e recursos nas atividades.',
+    fixas:[
+      {id:'f1',icon:'🎓',txt:'Conquistar uma especialidade sobre um tema de seu interesse e que seja um conhecimento novo.'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1',icon:'🗣️',txt:'Escolher um novo idioma e aprender cinco frases úteis.'},
+      {id:'v2',icon:'📖',txt:'Contar para a alcateia a história de um livro que tenha lido.'},
+      {id:'v3',icon:'📚',txt:'Conhecer uma biblioteca e pedir a recomendação de um livro ao bibliotecário, sobre temas de seu interesse.'},
+      {id:'v4',icon:'🌟',txt:'Demonstrar para a alcateia um conhecimento ou habilidade que possui.'},
+      {id:'v5',icon:'👑',txt:'Ouvir a história "O aguilhão do rei" e contar suas conclusões.'},
+      {id:'v6',icon:'✉️',txt:'Com a ajuda dos responsáveis, escrever uma carta para um Velho Lobo e enviá-la pelo correio ou por e-mail.'},
+      {id:'v7',icon:'💼',txt:'Apresentar à alcateia uma profissão de seu interesse, explicando os requisitos necessários para exercê-la.'},
+      {id:'v8',icon:'🤝',txt:'Demonstrar para a alcateia uma habilidade que aprendeu com outra pessoa (familiares, amigos ou convidados).'},
+      {id:'v9',icon:'📓',txt:'Montar um "diário de curiosidades" com cinco coisas novas aprendidas e contar para a alcateia.'},
+      {id:'vm1',icon:'✈️',txt:'Participar de um evento aeronáutico, como uma demonstração de acrobacias aéreas, portões abertos em bases aéreas ou aeroportos, torneios aeromodelismo ou eventos similares.', modalidade:'ar'},
+      {id:'vm2',icon:'✈️',txt:'Identificar as partes básicas de uma aeronave, em maquete, desenho ou visita.', modalidade:'ar'},
+      {id:'vm3',icon:'⛵',txt:'Identificar partes básicas de uma embarcação em maquete, desenho ou visita.', modalidade:'mar'},
+      {id:'vm4',icon:'⛵',txt:'Reconhecer tipos de água (doce/salgada) e listar 3 diferenças percebidas.', modalidade:'mar'},
+      {id:'vs1', icon:'🏅',txt:'Arquitetura e Urbanismo', isSpecVar:true},
+      {id:'vs2', icon:'🏅',txt:'Astronáutica', isSpecVar:true},
+      {id:'vs3', icon:'🏅',txt:'Astronomia', isSpecVar:true},
+      {id:'vs4', icon:'🏅',txt:'Aeromodelismo', isSpecVar:true},
+      {id:'vs5', icon:'🏅',txt:'Biblioteconomia', isSpecVar:true},
+      {id:'vs6', icon:'🏅',txt:'Cartografia', isSpecVar:true},
+      {id:'vs7', icon:'🏅',txt:'Comunicações', isSpecVar:true},
+      {id:'vs8', icon:'🏅',txt:'Confeitaria', isSpecVar:true},
+      {id:'vs9', icon:'🏅',txt:'Construção Civil', isSpecVar:true},
+      {id:'vs10',icon:'🏅',txt:'Criptografia', isSpecVar:true},
+      {id:'vs11',icon:'🏅',txt:'Culinária', isSpecVar:true},
+      {id:'vs12',icon:'🏅',txt:'Design de Interiores', isSpecVar:true},
+      {id:'vs13',icon:'🏅',txt:'E-Sports', isSpecVar:true},
+      {id:'vs14',icon:'🏅',txt:'Etiqueta', isSpecVar:true},
+      {id:'vs15',icon:'🏅',txt:'Ferramentas de Corte', isSpecVar:true},
+      {id:'vs16',icon:'🏅',txt:'Fiscalização de Pátio de Aeródromo', isSpecVar:true},
+      {id:'vs17',icon:'🏅',txt:'Informática', isSpecVar:true},
+      {id:'vs18',icon:'🏅',txt:'Investimentos', isSpecVar:true},
+      {id:'vs19',icon:'🏅',txt:'Jornalismo', isSpecVar:true},
+      {id:'vs20',icon:'🏅',txt:'Manicure', isSpecVar:true},
+      {id:'vs21',icon:'🏅',txt:'Manutenção Elétrica', isSpecVar:true},
+      {id:'vs22',icon:'🏅',txt:'Marcenaria', isSpecVar:true},
+      {id:'vs23',icon:'🏅',txt:'Marinharia', isSpecVar:true},
+      {id:'vs24',icon:'🏅',txt:'Matemática', isSpecVar:true},
+      {id:'vs25',icon:'🏅',txt:'Mecânica Aérea', isSpecVar:true},
+      {id:'vs26',icon:'🏅',txt:'Mecânica de Automóveis', isSpecVar:true},
+      {id:'vs27',icon:'🏅',txt:'Navegação Aérea', isSpecVar:true},
+      {id:'vs28',icon:'🏅',txt:'Observação Aérea', isSpecVar:true},
+      {id:'vs29',icon:'🏅',txt:'Planador', isSpecVar:true},
+      {id:'vs30',icon:'🏅',txt:'Prevenção de Incêndio', isSpecVar:true},
+      {id:'vs31',icon:'🏅',txt:'Produção Gráfica', isSpecVar:true},
+      {id:'vs32',icon:'🏅',txt:'Programação', isSpecVar:true},
+      {id:'vs33',icon:'🏅',txt:'Química', isSpecVar:true},
+      {id:'vs34',icon:'🏅',txt:'Radioamadorismo', isSpecVar:true},
+      {id:'vs35',icon:'🏅',txt:'Radioescuta', isSpecVar:true},
+      {id:'vs36',icon:'🏅',txt:'Redes de Computadores', isSpecVar:true},
+      {id:'vs37',icon:'🏅',txt:'Segurança e Emergência Náutica', isSpecVar:true},
+      {id:'vs38',icon:'🏅',txt:'Segurança no Trânsito', isSpecVar:true},
+      {id:'vs39',icon:'🏅',txt:'Simulação Aérea', isSpecVar:true},
+      {id:'vs40',icon:'🏅',txt:'Sinalização', isSpecVar:true},
+      {id:'vs41',icon:'🏅',txt:'Técnica Aeronáutica', isSpecVar:true},
+      {id:'vs42',icon:'🏅',txt:'Vendas', isSpecVar:true},
+      {id:'vs43',icon:'🏅',txt:'Web Design', isSpecVar:true},
+    ],
+    specs:[],
+    insignias:[
+      {id:'i1',txt:'Insígnia do Aprender'},
+    ],
+  },
+  b2:{
+    eixo:'Habilidades para a Vida', cor:'#c0392b', icon:'😌', nome:'Inteligência Emocional',
+    desc:'Reconhecer suas emoções e aprender a lidar com diferentes situações, buscando sempre tirar lições de cada experiência.',
+    fixas:[],
+    varQtd:5,
+    vars:[
+      {id:'v1',icon:'💬',txt:'Conversar com a família, responsáveis ou Velhos Lobos sobre pontos que gosta e não gosta em si mesmo e como melhorá-los.'},
+      {id:'v2',icon:'🤝',txt:'Contar a um Velho Lobo sobre um momento difícil recente e descrever o que ajudou a melhorar a situação.'},
+      {id:'v3',icon:'🎵',txt:'Cantar canções com a alcateia e participar de uma dança da Jângal.'},
+      {id:'v4',icon:'🚨',txt:'Identificar situações perigosas, sabendo como agir e a quem recorrer.'},
+      {id:'v5',icon:'💪',txt:'Escolher um pequeno desafio que dá insegurança (ex.: falar em público) e tentar superá-lo; depois contar a um Velho Lobo o que mudou.'},
+      {id:'v6',icon:'🧘',txt:'Aprender e ensinar para a alcateia uma atividade de relaxamento.'},
+    ],
+    specs:[],
+  },
+  b1:{
+    eixo:'Habilidades para a Vida', cor:'#c0392b', icon:'🎨', nome:'Criatividade e Inovação',
+    desc:'Utilizar a criatividade para encontrar diferentes soluções para desafios do dia a dia, experimentando novas maneiras de resolver problemas.',
+    fixas:[
+      {id:'f1',icon:'🔧',txt:'Construir uma engenhoca simples (varal, suporte de panela).'},
+    ],
+    varQtd:5,
+    vars:[
+      {id:'v1',icon:'🎁',txt:'Em uma atividade de trabalhos manuais, utilizar a técnica de embrulho de presente e encapar um livro para sua melhor conservação.'},
+      {id:'v2',icon:'🪡',txt:'Costurar um distintivo em seu uniforme ou vestuário escoteiro.'},
+      {id:'v3',icon:'🎪',txt:'Criar e apresentar com sua matilha uma esquete em uma Flor Vermelha.'},
+      {id:'v4',icon:'📣',txt:'Divulgar sua UEL na escola por meio de cartazes, depoimentos, vídeos e folders.'},
+      {id:'v5',icon:'🎨',txt:'Apresentar um trabalho artístico para sua alcateia, como: pintura, modelagem, colagem etc.'},
+      {id:'v6',icon:'💡',txt:'Planejar, organizar e executar um pequeno projeto científico, artístico ou utilitário.'},
+      {id:'v7',icon:'🎲',txt:'Ensinar um jogo para outros lobinhos.'},
+      {id:'v8',icon:'🎭',txt:'Durante uma Flor Vermelha, utilizando diversos materiais para criar uma caracterização.'},
+      {id:'v9',icon:'🔐',txt:'Criar um código simples (cores, símbolos ou sons) para enviar uma mensagem para outro lobinho decifrar.'},
+      {id:'vm1',icon:'⛵',txt:'Fazer um trabalho artesanal marinheiro com cabos, usando nós característicos da marinharia.', modalidade:'mar'},
+      {id:'vm2',icon:'✈️',txt:'Montar uma biruta simples e registrar a direção do vento em três dias diferentes.', modalidade:'ar'},
+      {id:'vm3',icon:'✈️',txt:'Fazer e empinar uma pipa seguindo as regras de segurança.', modalidade:'ar'},
+    ],
+    specs:['Arte Digital','Artes Visuais','Artesanato','Comédia','Costura e Estilismo','Encadernação','Grafite','HQ','Maquete','Pintura','Propaganda e Marketing','Robótica','Videomaker'],
+  }
+  /* adicionar próximos blocos aqui */
+};
+
+/* ── ESTADO ── */
+
+const ETAPA_INFO={
+  1:{nome:'Lobo Pata Tenra', icon:'🐾', cor:'#e6a800', msg:'Você concluiu a primeira etapa da jornada!'},
+  2:{nome:'Lobo Saltador',   icon:'🌊', cor:'#2a90d4', msg:'Você está avançando na alcateia!'},
+  3:{nome:'Lobo Rastreador', icon:'🔍', cor:'#e05a20', msg:'Já são 13 blocos concluídos! Incrível!'},
+  4:{nome:'Lobo Caçador',    icon:'🏹', cor:'#8b3fcc', msg:'Você completou todas as etapas! Agora busque o Cruzeiro do Sul!'},
+};
+const METAS={1:4,2:4,3:5,4:5};
+const ORIG={1:'4 blocos',2:'+4 blocos',3:'+5 blocos',4:'+5 blocos'};
+const chosen={1:new Set(),2:new Set(),3:new Set(),4:new Set()};
+const eixoOf={},iconOf={},nomeOf={};
+const wasComplete={1:false,2:false,3:false,4:false};
+let activeID=null, curTab=0, pendingEtapa=null;
+let prog={};
+
+
+function getProg(id){if(!prog[id])prog[id]={f:new Set(),v:new Set(),s:new Set()};return prog[id];}
+
+function save(){
+  const st={chosen:{1:[...chosen[1]],2:[...chosen[2]],3:[...chosen[3]],4:[...chosen[4]]},prog:{}};
+  for(const k in prog)st.prog[k]={f:[...prog[k].f],v:[...prog[k].v],s:[...prog[k].s]};
+  try{localStorage.setItem('lb26v2',JSON.stringify(st));}catch(e){}
+}
+function load(){
+  try{
+    const raw=localStorage.getItem('lb26v2');if(!raw)return;
+    const st=JSON.parse(raw);
+    [1,2,3,4].forEach(e=>chosen[e]=new Set(st.chosen[e]||[]));
+
+    for(const k in(st.prog||{})){const p=st.prog[k];prog[k]={f:new Set(p.f),v:new Set(p.v),s:new Set(p.s)};}
+  }catch(e){}
+}
+
+function calc(id){
+  const d=BD[id];if(!d)return{pct:0,cf:true,cv:true,done:false,dv:0,hs:false};
+  const p=getProg(id);
+  const fixasTerrestres=d.fixas.filter(x=>!x.modalidade);
+  const cf=fixasTerrestres.length===0||fixasTerrestres.every(x=>p.f.has(x.id));
+  const dv=d.vars.filter(x=>p.v.has(x.id)).length;
+  const hs=p.s.size>0;
+  const cv=dv>=d.varQtd||hs;
+  const tot=d.fixas.length+d.varQtd;
+  const don=d.fixas.filter(x=>p.f.has(x.id)).length+Math.min(hs?d.varQtd:dv,d.varQtd);
+  return{pct:tot?Math.round(don/tot*100):100,cf,cv,done:cf&&cv,dv,hs};
+}
+
+function allUsed(){const s=new Set();for(let e=1;e<=4;e++)chosen[e].forEach(id=>s.add(id));return s;}
+
+function refreshBlocos(){
+  const used=allUsed();
+  document.querySelectorAll('.bloco').forEach(el=>{
+    const id=el.dataset.id;
+    el.classList.remove('used','mine','picking','active-detail','done-bloco');
+    if(BD[id]&&calc(id).done){el.classList.add('done-bloco');return;}
+    if(id===activeID)el.classList.add('active-detail');
+    else if(used.has(id))el.classList.add('used');
+  });
+}
+
+function refreshChips(e){
+  const c=document.getElementById('chips'+e);
+  const st=document.getElementById('st'+e);
+  const sb=document.getElementById('sb'+e);
+  const sel=chosen[e],done=sel.size>=METAS[e];
+  st.classList.toggle('complete',done);
+  sb.textContent=done?'Completa ✓':ORIG[e];
+  if(done&&!wasComplete[e]){wasComplete[e]=true;pendingEtapa=e;}
+  if(!done)wasComplete[e]=false;
+  c.innerHTML='';
+  sel.forEach(id=>{
+    const ch=document.createElement('div');
+    const isDone=BD[id]&&calc(id).done;
+    ch.className='stage-chip chip-'+eixoOf[id]+(isDone?' done-chip':'');
+    ch.innerHTML='<span class="ci">'+iconOf[id]+'</span><span class="cn">'+nomeOf[id]+'</span>'+(isDone?'':'<span class="rm">✕</span>');
+    if(!isDone){
+      ch.onclick=ev=>{ev.stopPropagation();chosen[e].delete(id);refreshChips(e);refreshBlocos();save();};
+    }
+    c.appendChild(ch);
+  });
+}
+
+/* ── SIDEBAR ── */
+function openSB(id){
+  const d=BD[id]; activeID=id;
+  const hdr=document.querySelector('.sb-hdr');
+  hdr.style.borderLeftColor=d.cor;
+  document.getElementById('sb-eixo').style.color=d.cor;
+  document.getElementById('sb-eixo').textContent=d.eixo;
+  document.getElementById('sb-nome').textContent=d.icon+' '+d.nome;
+  document.getElementById('sb-desc').textContent=d.desc;
+  // mostrar/ocultar abas conforme o bloco
+  const tabFixas=document.getElementById('tab-fixas');
+  const tabSpecs=document.getElementById('tab-specs');
+  tabFixas.style.display=d.fixas.length>0?'':'none';
+  tabSpecs.style.display=(d.specs.length>0||(d.insignias&&d.insignias.length>0))?'':'none';
+  // atualizar label da aba especialidades/insígnias
+  const tabSpecsEl=document.getElementById('tab-specs');
+  if(tabSpecsEl){
+    const hasSpecs=d.specs.length>0;
+    const hasIns=d.insignias&&d.insignias.length>0;
+    if(hasSpecs&&hasIns) tabSpecsEl.childNodes[0].textContent='🏅 Espec. / Insígnias';
+    else if(hasIns) tabSpecsEl.innerHTML='<span class="tab-icon">🏅</span>Insígnias<span class="tab-cnt cnt-pending" id="cnt-tab2">0</span>';
+    else tabSpecsEl.innerHTML='<span class="tab-icon">🏅</span>Especialidades<span class="tab-cnt cnt-pending" id="cnt-tab2">0</span>';
+  }
+  // ir para a primeira aba visível
+  const firstTab=d.fixas.length>0?0:1;
+  goTab(firstTab);
+  renderSB(id);
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('ov').classList.add('on');
+  refreshBlocos();
+}
+
+function renderSB(id){
+  const d=BD[id];const p=getProg(id);const c=calc(id);
+  const pb=document.getElementById('pb');
+  pb.style.width=c.pct+'%';
+  pb.style.background=c.pct===100?'#2a7a2a':c.pct>60?'#4a9a4a':'#4a7ad8';
+  document.getElementById('pp').textContent=c.pct+'%';
+  document.getElementById('pp').style.color=c.pct===100?'#2a7a2a':'#333';
+  document.getElementById('bfix').className='badge '+(c.cf?'b-ok':'b-no');
+  document.getElementById('bfix').textContent=(c.cf?'✓':'○')+' Fixas';
+  document.getElementById('bvar').className='badge '+(c.cv?'b-ok':'b-no');
+  document.getElementById('bvar').textContent=(c.cv?'✓':'○')+' Variáveis';
+  updateTabCounters(id);
+
+  /* aba 0: fixas */
+  const qf=document.getElementById('q-fixas');qf.innerHTML='';
+  if(d.fixas.length===0){
+    qf.innerHTML='<div style="padding:20px;text-align:center;color:#aaa;font-size:13px;">Este bloco não possui ações fixas.</div>';
+  } else {
+    d.fixas.filter(x=>!x.modalidade).forEach(item=>{
+      qf.appendChild(mkCard('cf',p.f.has(item.id),item.icon,item.txt,()=>{
+        p.f.has(item.id)?p.f.delete(item.id):p.f.add(item.id);
+        save();renderSB(id);checkDone(id);
+      }));
+    });
+  }
+
+  /* aba 1: variáveis */
+  const qv=document.getElementById('q-vars');qv.innerHTML='';
+  // separador para vars-especialidade se existirem
+  const hasSpecVars=d.vars.some(x=>x.isSpecVar);
+  let sepAdded=false, sepArAdded=false;
+  d.vars.forEach(item=>{
+    if((item.modalidade==='ar'||item.modalidade==='mar') && !sepArAdded){
+      sepArAdded=true;
+      const sep=document.createElement('div');
+      sep.style.cssText='grid-column:1/-1;padding:6px 4px 2px;font-size:11px;font-weight:700;color:#2a7ab8;border-top:1px dashed #a8d0f0;margin-top:4px;';
+      sep.textContent='✈️ ⛵ Atividades de modalidade específica:';
+      qv.appendChild(sep);
+    }
+    if(item.isSpecVar && !sepAdded){
+      sepAdded=true;
+      const sep=document.createElement('div');
+      sep.style.cssText='grid-column:1/-1;padding:6px 4px 2px;font-size:11px;font-weight:700;color:#c8880a;border-top:1px dashed #e8c878;margin-top:4px;';
+      sep.textContent='🏅 Especialidades que valem como variável:';
+      qv.appendChild(sep);
+    }
+    let cls='cv', badge='';
+    if(item.isSpecVar){cls='cv-spec';badge='<span class="badge-sv">ESPECIALIDADE</span>';}
+    else if(item.modalidade==='ar'){cls='cv-ar';badge='<span class="badge-ar">✈️ MODALIDADE DO AR</span>';}
+    else if(item.modalidade==='mar'){cls='cv-mar';badge='<span class="badge-mar">⛵ MODALIDADE DO MAR</span>';}
+    const txt=item.txt+badge;
+    const el=document.createElement('div');
+    el.className='card '+cls+(p.v.has(item.id)?' ck':'');
+    el.innerHTML='<div class="chk">'+(p.v.has(item.id)?'✓':'')+'</div>'
+      +(item.isSpecVar?'':'<span class="card-icon">'+item.icon+'</span>')
+      +'<span class="card-txt">'+txt+'</span>';
+    el.onclick=()=>{
+      p.v.has(item.id)?p.v.delete(item.id):p.v.add(item.id);
+      save();renderSB(id);checkDone(id);
+    };
+    qv.appendChild(el);
+  });
+
+  /* aba 2: especialidades */
+  const qs=document.getElementById('q-specs');qs.innerHTML='';
+  if(d.specs.length===0){
+    qs.innerHTML='<div style="padding:20px;text-align:center;color:#aaa;font-size:13px;grid-column:1/-1;">Este bloco não possui especialidades associadas.</div>';
+  }
+  d.specs.forEach(nm=>{
+    const sid='s_'+nm;
+    const el=mkCard('cs',p.s.has(sid),'',nm,()=>{
+      p.s.has(sid)?p.s.delete(sid):p.s.add(sid);
+      save();renderSB(id);checkDone(id);
+    });
+    el.style.flex='0 0 auto';
+    qs.appendChild(el);
+  });
+  // insígnias
+  if(d.insignias&&d.insignias.length>0){
+    d.insignias.forEach(item=>{
+      const iid='ins_'+item.id;
+      const ck=p.s.has(iid);
+      const el=document.createElement('div');
+      el.className='card ci-ins'+(ck?' ck':'');
+      el.style.flex='0 0 auto';
+      el.innerHTML='<div class="chk">'+(ck?'✓':'')+'</div>'
+        +'<span class="card-txt">'+item.txt+'<span class="badge-ins">INSÍGNIA</span></span>';
+      el.onclick=()=>{
+        p.s.has(iid)?p.s.delete(iid):p.s.add(iid);
+        save();renderSB(id);checkDone(id);
+      };
+      qs.appendChild(el);
+    });
+  }
+}
+
+function mkCard(cls,ck,icon,txt,cb){
+  const el=document.createElement('div');
+  el.className='card '+cls+(ck?' ck':'');
+  el.innerHTML='<div class="chk">'+(ck?'✓':'')+'</div>'
+    +(icon?'<span class="card-icon">'+icon+'</span>':'')
+    +'<span class="card-txt">'+txt+'</span>';
+  el.onclick=cb;
+  return el;
+}
+
+
+function updateTabCounters(id){
+  if(!id||!BD[id]) return;
+  const d=BD[id]; const p=getProg(id); const c=calc(id);
+  const el0=document.getElementById('cnt-tab0');
+  const el1=document.getElementById('cnt-tab1');
+  const el2=document.getElementById('cnt-tab2');
+  if(!el1) return;
+  const fixasTer=d.fixas.filter(x=>!x.modalidade);
+  const df=fixasTer.filter(x=>p.f.has(x.id)).length;
+  const tf=fixasTer.length;
+  if(el0){el0.textContent=tf>0?df+'/'+tf:'—';el0.className='tab-cnt '+(tf>0&&df===tf?'cnt-done':df>0?'cnt-partial':'cnt-pending');}
+  const dv=c.dv; const tv=d.varQtd;
+  el1.textContent=dv+'/'+tv+(c.hs?' +esp':'');
+  el1.className='tab-cnt '+(c.cv?'cnt-done':dv>0?'cnt-partial':'cnt-pending');
+  const ds=p.s.size;
+  if(el2){el2.textContent=ds>0?ds:'0';el2.className='tab-cnt '+(ds>0?'cnt-done':'cnt-pending');}
+}
+function goTab(n){
+  curTab=n;
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('on',i===n));
+  document.querySelectorAll('.panel').forEach((p,i)=>p.classList.toggle('on',i===n));
+}
+
+function checkDone(id){
+  const c=calc(id);
+  refreshBlocos();
+  if(c.done && !wasDone[id]){
+    wasDone[id]=true;
+    setTimeout(()=>mostrarFesta(id),300);
+  }
+  // se voltou a ser incompleto, remove dos chips de todas as etapas e reseta etapa
+  if(!c.done && wasDone[id]){
+    wasDone[id]=false;
+    [1,2,3,4].forEach(e=>{
+      if(chosen[e].has(id)){
+        chosen[e].delete(id);
+        // etapa volta a ser incompleta — resetar estado
+        wasComplete[e]=false;
+        pendingEtapa=null;
+        // atualizar badge da etapa
+        const sbEl=document.getElementById('sb'+e);
+        if(sbEl) sbEl.textContent=ORIG[e];
+        const stEl=document.getElementById('st'+e);
+        if(stEl) stEl.classList.remove('complete');
+        refreshChips(e);
+      }
+    });
+    refreshBlocos();
+    save();
+  }
+}
+
+const wasDone={};
+
+function mostrarFesta(id){
+  const d=BD[id];
+  document.getElementById('festa-emoji').textContent=d.icon;
+  document.getElementById('festa-titulo').textContent='Bloco concluído!';
+  document.getElementById('festa-sub').textContent=d.nome+' finalizado! Incrível! 🐺';
+  document.getElementById('festa-overlay').classList.add('show');
+  confettiBig();
+}
+
+function fecharFesta(){
+  document.getElementById('festa-overlay').classList.remove('show');
+  const id=activeID;
+  if(id) setTimeout(()=>flyBloco(id),200);
+}
+
+function flyBloco(id){
+  // bloquear se acolhida não completa
+  if(!isAcolhidaComplete()) return;
+  const el=document.querySelector('.bloco[data-id="'+id+'"]');
+  if(!el)return;
+  // verificar se já está em alguma etapa (não adicionar duplicado)
+  const jaEsta=[1,2,3,4].some(e=>chosen[e].has(id));
+  if(jaEsta){refreshBlocos();return;}
+  el.classList.add('flying');
+  const next=nextEtapa();
+  if(next){
+    eixoOf[id]=el.dataset.eixo;iconOf[id]=el.dataset.icon;nomeOf[id]=el.dataset.nome;
+    setTimeout(()=>{chosen[next].add(id);el.classList.remove('flying');refreshChips(next);refreshBlocos();save();if(isMobile&&mobActiveTab==='etapas')renderMobEtapas();if(isMobile&&mobActiveTab==='home')renderMobHome();},500);
+  }else setTimeout(()=>{el.classList.remove('flying');refreshBlocos();},500);
+}
+function nextEtapa(){
+  // respeita sequência: só vai para etapa N quando todas as anteriores estão cheias
+  for(let e=1;e<=4;e++){
+    if(chosen[e].size<METAS[e]){
+      // verificar se etapas anteriores estão completas
+      let anterior_ok=true;
+      for(let a=1;a<e;a++){
+        if(chosen[a].size<METAS[a]){anterior_ok=false;break;}
+      }
+      if(anterior_ok) return e;
+      break; // etapa anterior não completa — não há próxima disponível
+    }
+  }
+  return null;
+}
+
+function closeSB(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('ov').classList.remove('on');
+  activeID=null;refreshBlocos();
+  // disparar conquista de etapa se pendente
+  if(pendingEtapa!==null){
+    const e=pendingEtapa;
+    pendingEtapa=null;
+    setTimeout(()=>mostrarConquistaEtapa(e),350);
+  }
+}
+
+function blocoClick(el){
+  const id=el.dataset.id;
+  if(BD[id]){activeID===id?closeSB():openSB(id);}
+}
+
+
+
+
+/* ══ LÓGICA DE BLOQUEIO DA ACOLHIDA ══ */
+
+function isAcolhidaComplete(){
+  return acolhidaDone.size >= ACOLHIDA.length;
+}
+
+function updateLockState(){
+  const complete = isAcolhidaComplete();
+  const lockBanner = document.getElementById('lock-banner');
+  const colTitle = document.querySelector('.col-right .col-title');
+  const stages = document.querySelector('.stages');
+  const hint = document.getElementById('hint');
+  const crzMini = document.querySelector('.crz-mini');
+  const bar = document.getElementById('lock-prog-bar');
+  const lbl = document.getElementById('lock-prog-lbl');
+
+  if(bar){ bar.style.width = Math.round(acolhidaDone.size/ACOLHIDA.length*100)+'%'; }
+  if(lbl){ lbl.textContent = acolhidaDone.size+' / '+ACOLHIDA.length; }
+
+  if(lockBanner){
+    lockBanner.classList.toggle('hidden', complete);
+  }
+  if(colTitle) colTitle.style.display = complete?'':'none';
+  if(stages) stages.style.display = complete?'':'none';
+  if(hint) hint.style.display = complete?'':'none';
+  if(crzMini) crzMini.style.display = complete?'':'none';
+
+  // atualizar banner do cabeçalho
+  renderAcolhidaBanner();
+}
+
+function mostrarAcolhidaFesta(){
+  if(acolhidaFestaShown) return;
+  acolhidaFestaShown = true;
+  document.getElementById('acol-festa-overlay').classList.add('show');
+  confettiBig();
+  setTimeout(confettiBig, 1200);
+}
+
+function fecharAcolhidaFesta(){
+  document.getElementById('acol-festa-overlay').classList.remove('show');
+  document.getElementById('ov').classList.remove('on');
+  updateLockState();
+}
+
+/* ══ TRAVAR flyBloco SE ACOLHIDA INCOMPLETA ══ */
+/* ══ PERÍODO DE ACOLHIDA ══ */
+
+
+
+/* ══ LÓGICA DE BLOQUEIO DA ACOLHIDA ══ */
+let acolhidaFestaShown = false;
+
+function isAcolhidaComplete(){
+  return acolhidaDone.size >= ACOLHIDA.length;
+}
+
+function updateLockState(){
+  const complete = isAcolhidaComplete();
+  const lockBanner = document.getElementById('lock-banner');
+  const colTitle = document.querySelector('.col-right .col-title');
+  const stages = document.querySelector('.stages');
+  const hint = document.getElementById('hint');
+  const crzMini = document.querySelector('.crz-mini');
+  const bar = document.getElementById('lock-prog-bar');
+  const lbl = document.getElementById('lock-prog-lbl');
+
+  if(bar){ bar.style.width = Math.round(acolhidaDone.size/ACOLHIDA.length*100)+'%'; }
+  if(lbl){ lbl.textContent = acolhidaDone.size+' / '+ACOLHIDA.length; }
+
+  if(lockBanner){
+    lockBanner.classList.toggle('hidden', complete);
+  }
+  if(colTitle) colTitle.style.display = complete?'':'none';
+  if(stages) stages.style.display = complete?'':'none';
+  if(hint) hint.style.display = complete?'':'none';
+  if(crzMini) crzMini.style.display = complete?'':'none';
+
+  // atualizar banner do cabeçalho
+  renderAcolhidaBanner();
+}
+
+function mostrarAcolhidaFesta(){
+  if(acolhidaFestaShown) return;
+  acolhidaFestaShown = true;
+  document.getElementById('acol-festa-overlay').classList.add('show');
+  confettiBig();
+  setTimeout(confettiBig, 1200);
+}
+
+function fecharAcolhidaFesta(){
+  document.getElementById('acol-festa-overlay').classList.remove('show');
+  document.getElementById('ov').classList.remove('on');
+  updateLockState();
+}
+
+/* ══ TRAVAR flyBloco SE ACOLHIDA INCOMPLETA ══ */
+
+const ACOLHIDA = [
+  {id:'a1', txt:'Participar ativamente das atividades da alcateia e integrar uma matilha, utilizar o seu distintivo, conhecer as outras matilhas da alcateia e os Velhos Lobos.'},
+  {id:'a2', txt:'Utilizar o lenço escoteiro e conhecer seu significado. Saber também o nome da UEL e da alcateia.'},
+  {id:'a3', txt:'Participar das formações e atender às vozes de comando orientadas pelos Velhos Lobos.'},
+  {id:'a4', txt:'Ouvir a história "Irmãos de Mowgli", do Livro da Jângal.'},
+  {id:'a5', txt:'Usar o lema do lobinho, a saudação e o aperto de mão. Participar do Grande Uivo e saber seu significado.'},
+  {id:'a6', txt:'Saber como conquistar os distintivos do Ramo Lobinho e conhecer o uniforme ou vestuário escoteiro usado na alcateia.'},
+  {id:'a7', txt:'Conhecer a Lei do Lobinho e a Promessa. Conversar com o Velho Lobo sobre a sua importância e sentir-se pronto para assumir esse compromisso.'},
+];
+
+let acolhidaDone = new Set();
+
+function loadAcolhida(){
+  try{
+    const raw = localStorage.getItem('lb26_acolhida');
+    if(raw) acolhidaDone = new Set(JSON.parse(raw));
+  }catch(e){}
+}
+function saveAcolhida(){
+  try{ localStorage.setItem('lb26_acolhida', JSON.stringify([...acolhidaDone])); }catch(e){}
+  updateLockState();
+  if(isAcolhidaComplete() && !acolhidaFestaShown){
+    // fechar sidebar sem remover overlay — festa vai por cima
+    document.getElementById('acol-sidebar').classList.remove('open');
+    setTimeout(mostrarAcolhidaFesta, 350);
+  }
+}
+
+function renderAcolhidaBanner(){
+  const done = acolhidaDone.size;
+  const total = ACOLHIDA.length;
+  const pct = Math.round(done/total*100);
+  const isComplete = done === total;
+  const banner = document.getElementById('acolhida-banner');
+  const progBar = document.getElementById('acol-prog-bar');
+  const title = document.getElementById('acol-banner-title');
+  const sub = document.getElementById('acol-banner-sub');
+  const btn = document.getElementById('acol-btn');
+  if(!banner) return;
+  progBar.style.width = pct+'%';
+  if(isComplete){
+    banner.classList.add('done');
+    title.textContent = '✓ Período de Acolhida concluído!';
+    sub.textContent = 'O lobinho está pronto para iniciar sua jornada nos blocos.';
+    btn.textContent = 'Ver atividades ✓';
+  } else {
+    banner.classList.remove('done');
+    title.textContent = 'Complete o Período de Acolhida primeiro!';
+    sub.textContent = done+' de '+total+' atividades concluídas.';
+    btn.textContent = 'Ver atividades →';
+  }
+}
+
+function renderAcolhidaSidebar(){
+  const body = document.getElementById('acol-sb-body');
+  if(!body) return;
+  body.innerHTML = '';
+  ACOLHIDA.forEach(item => {
+    const ck = acolhidaDone.has(item.id);
+    const div = document.createElement('div');
+    div.className = 'acol-card' + (ck?' ck':'');
+    div.innerHTML = '<div class="acol-chk">'+(ck?'✓':'')+'</div><span>'+item.txt+'</span>';
+    div.onclick = () => {
+      acolhidaDone.has(item.id) ? acolhidaDone.delete(item.id) : acolhidaDone.add(item.id);
+      saveAcolhida();
+      renderAcolhidaSidebar();
+      renderAcolhidaBanner();
+    };
+    body.appendChild(div);
+  });
+  const done = acolhidaDone.size;
+  const total = ACOLHIDA.length;
+  const pct = Math.round(done/total*100);
+  document.getElementById('acol-footer-bar').style.width = pct+'%';
+  document.getElementById('acol-footer-pct').textContent = done+' / '+total;
+  document.getElementById('acol-footer-bar').style.background = done===total?'#4caf64':'#f5a623';
+  document.getElementById('acol-footer-pct').style.color = done===total?'#2a7a2a':'#f5a623';
+}
+
+function openAcolhida(){
+  renderAcolhidaSidebar();
+  document.getElementById('acol-sidebar').classList.add('open');
+  document.getElementById('ov').classList.add('on');
+}
+function closeAcolhida(){
+  document.getElementById('acol-sidebar').classList.remove('open');
+  document.getElementById('ov').classList.remove('on');
+}
+
+
+/* ══ BUSCA ══ */
+const EIXO_COR = {e1:'#c0392b',e2:'#27ae60',e3:'#2980b9',e4:'#d35400'};
+const EIXO_NOME = {e1:'Habilidades para a Vida',e2:'Meio Ambiente',e3:'Paz e Desenvolvimento',e4:'Saúde e Bem-Estar'};
+
+function buildSearchIndex(){
+  const idx=[];
+  for(const bid in BD){
+    const d=BD[bid];
+    // descobrir eixo pelo bloco
+    const el=document.querySelector('.bloco[data-id="'+bid+'"]');
+    const eixoClass=el?([...el.closest('.eixo-col').classList].find(c=>/^e[0-9]$/.test(c))||'e1'):'e1';
+    const eixoNome=EIXO_NOME[eixoClass]||d.eixo;
+    const eixoCor=EIXO_COR[eixoClass]||d.cor;
+
+    // fixas
+    d.fixas.filter(x=>!x.modalidade).forEach(f=>{
+      idx.push({bid,eixo:eixoNome,eixoCor,eixoClass,bloco:d.nome,blocoIcon:d.icon,txt:f.txt,tipo:'fix',tipoLabel:'FIXA',tab:0});
+    });
+    // vars
+    d.vars.forEach(v=>{
+      let tipo='var',tipoLabel='VARIÁVEL',tab=1;
+      if(v.isSpecVar){tipo='spec';tipoLabel='ESPECIALIDADE';}
+      else if(v.modalidade==='ar'){tipo='ar';tipoLabel='VAR ✈️ AR';}
+      else if(v.modalidade==='mar'){tipo='mar';tipoLabel='VAR ⛵ MAR';}
+      idx.push({bid,eixo:eixoNome,eixoCor,eixoClass,bloco:d.nome,blocoIcon:d.blocoIcon||d.icon,txt:v.txt,tipo,tipoLabel,tab});
+    });
+    // specs
+    d.specs.forEach(s=>{
+      idx.push({bid,eixo:eixoNome,eixoCor,eixoClass,bloco:d.nome,blocoIcon:d.icon,txt:s,tipo:'spec',tipoLabel:'ESPECIALIDADE',tab:2});
+    });
+    // insignias
+    (d.insignias||[]).forEach(i=>{
+      idx.push({bid,eixo:eixoNome,eixoCor,eixoClass,bloco:d.nome,blocoIcon:d.icon,txt:i.txt,tipo:'ins',tipoLabel:'INSÍGNIA',tab:2});
+    });
+  }
+  // acolhida
+  ACOLHIDA.forEach(a=>{
+    idx.push({bid:'acolhida',eixo:'Período de Acolhida',eixoCor:'#f5a623',eixoClass:'',bloco:'Acolhida',blocoIcon:'🐾',txt:a.txt,tipo:'acol',tipoLabel:'ACOLHIDA',tab:-1});
+  });
+  return idx;
+}
+
+let searchIndex=null;
+
+function highlight(txt,q){
+  if(!q)return txt;
+  var parts=txt.split(new RegExp('('+q.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\^\$\|]/g,'\\$&')+')','gi'));
+  return parts.map(function(p){return p.toLowerCase()===q.toLowerCase()?'<mark>'+p+'</mark>':p;}).join('');
+}
+
+function doSearch(q){
+  if(!searchIndex) searchIndex=buildSearchIndex();
+  const dd=document.getElementById('search-dropdown');
+  const cnt=document.getElementById('search-count');
+  const clr=document.getElementById('search-clear');
+  if(!q||q.length<2){
+    dd.classList.remove('show');
+    cnt.style.display='none';
+    clr.style.display='none';
+    return;
+  }
+  clr.style.display='block';
+  const ql=q.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+  const results=searchIndex.filter(r=>{
+    const t=r.txt.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+    return t.includes(ql);
+  }).slice(0,20);
+
+  cnt.textContent=results.length+' resultado'+(results.length!==1?'s':'');
+  cnt.style.display='block';
+  cnt.style.color=results.length?'#f5e642':'#f08080';
+
+  dd.innerHTML='';
+  if(!results.length){
+    dd.innerHTML='<div class="sd-empty">Nenhuma atividade encontrada para "'+q+'"</div>';
+    dd.classList.add('show');
+    return;
+  }
+
+  results.forEach(r=>{
+    const div=document.createElement('div');
+    div.className=r.tipo==='acol'?'sd-acolhida':'sd-item';
+    const tipoClass={'fix':'st-fix','var':'st-var','spec':'st-spec','ins':'st-ins','ar':'st-ar','mar':'st-mar','acol':'st-spec'}[r.tipo]||'st-var';
+    div.innerHTML=
+      '<div class="sd-left">'
+      +'<div class="sd-crumb">'
+      +'<span class="sd-eixo" style="color:'+r.eixoCor+'">'+r.blocoIcon+' '+r.eixo+'</span>'
+      +(r.tipo!=='acol'?'<span class="sep">›</span><span class="sd-bloco">'+r.bloco+'</span>':'')
+      +'<span class="sep">›</span><span class="sd-tipo '+tipoClass+'">'+r.tipoLabel+'</span>'
+      +'</div>'
+      +'<div class="sd-txt">'+highlight(r.txt,q)+'</div>'
+      +'</div>'
+      +'<span class="sd-go">→</span>';
+    div.onclick=()=>{
+      clearSearch();
+      if(r.tipo==='acol'){openAcolhida();return;}
+      if(BD[r.bid]){
+        openSB(r.bid);
+        setTimeout(()=>goTab(r.tab),350);
+      }
+    };
+    dd.appendChild(div);
+  });
+  dd.classList.add('show');
+}
+
+function clearSearch(){
+  document.getElementById('search-input').value='';
+  document.getElementById('search-dropdown').classList.remove('show');
+  document.getElementById('search-count').style.display='none';
+  document.getElementById('search-clear').style.display='none';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const inp=document.getElementById('search-input');
+  if(inp){
+    inp.addEventListener('input',e=>doSearch(e.target.value));
+    inp.addEventListener('keydown',e=>{if(e.key==='Escape')clearSearch();});
+    document.addEventListener('click',e=>{
+      if(!e.target.closest('.search-wrap')) clearSearch();
+    });
+  }
+});
+
+/* ══ DETECÇÃO RESPONSIVA ══ */
+function onOrientationChange(){
+  var wasMobile = isMobile;
+  isMobile = detectMobile();
+  if(isMobile !== wasMobile) applyMobileMode();
+}
+window.addEventListener('resize', function(){ setTimeout(onOrientationChange, 100); });
+window.addEventListener('orientationchange', function(){ setTimeout(onOrientationChange, 200); });
+if(window.matchMedia){
+  window.matchMedia('(orientation: portrait)').addEventListener('change', function(){ setTimeout(onOrientationChange, 100); });
+}
+
+function initBlocoMaps(){
+  document.querySelectorAll('.bloco[data-id]').forEach(function(el){
+    var id = el.dataset.id;
+    if(BD[id]){
+      var eixoCol = el.closest('.eixo-col');
+      var eixoClass = eixoCol ? (['e1','e2','e3','e4'].find(function(c){ return eixoCol.classList.contains(c); })||'e1') : 'e1';
+      eixoOf[id] = eixoClass;
+      iconOf[id] = BD[id].icon;
+      nomeOf[id] = BD[id].nome;
+    }
+  });
+}
+
+
+/* ── INIT ── */
+try {
+
+load();
+[1,2,3,4].forEach(e=>{
+  chosen[e].forEach(id=>{const el=document.querySelector('.bloco[data-id="'+id+'"]');if(el){eixoOf[id]=el.dataset.eixo;iconOf[id]=el.dataset.icon;nomeOf[id]=el.dataset.nome;}});
+  refreshChips(e);
+});
+
+initBlocoMaps();
+loadAcolhida();
+renderAcolhidaBanner();
+applyConfig();
+applyMobileMode();
+updateLockState();
+if(isAcolhidaComplete()){acolhidaFestaShown=true;}
+refreshBlocos();
+
+/* ── CONFETTI ── */
+const cv2=document.getElementById('cc'),cx=cv2.getContext('2d');
+let pts=[],aid=null;
+const CL=['#f5e642','#2a7a2a','#c0392b','#2980b9','#d35400','#8b3fcc','#27ae60','#e6a800'];
+
+function mostrarConquistaEtapa(e){
+  const info=ETAPA_INFO[e];
+  document.getElementById('etapa-icon').textContent=info.icon;
+  document.getElementById('etapa-titulo').textContent='Etapa conquistada!';
+  document.getElementById('etapa-nome').textContent=info.nome;
+  document.getElementById('etapa-msg').textContent=info.msg;
+  // cor do botão e borda do card
+  document.getElementById('etapa-btn').style.background=info.cor;
+  document.getElementById('etapa-card').style.borderTop='6px solid '+info.cor;
+  document.getElementById('etapa-overlay').classList.add('show');
+  confettiBig();
+  // segunda salva de confetti após 1.2s
+  setTimeout(confettiBig, 1200);
+}
+
+function fecharEtapa(){
+  document.getElementById('etapa-overlay').classList.remove('show');
+}
+function confetti(){
+  cv2.width=innerWidth;cv2.height=innerHeight;pts=[];
+  for(let i=0;i<140;i++)pts.push({x:Math.random()*cv2.width,y:-10-Math.random()*60,r:4+Math.random()*5,c:CL[Math.floor(Math.random()*CL.length)],vx:(Math.random()-.5)*5,vy:2.5+Math.random()*4,rot:Math.random()*360,rv:(Math.random()-.5)*9,sh:Math.random()>.5,a:1});
+  if(aid)cancelAnimationFrame(aid);anim();
+}
+function confettiBig(){
+  cv2.width=innerWidth;cv2.height=innerHeight;pts=[];
+  // chuva densa vinda dos dois cantos superiores
+  for(let i=0;i<300;i++){
+    const left=Math.random()>.5;
+    pts.push({
+      x:left?(Math.random()*cv2.width*.3):(cv2.width*.7+Math.random()*cv2.width*.3),
+      y:-20-Math.random()*120,
+      r:5+Math.random()*7,
+      c:CL[Math.floor(Math.random()*CL.length)],
+      vx:(Math.random()-.5)*7+(left?2:-2),
+      vy:3+Math.random()*5,
+      rot:Math.random()*360,rv:(Math.random()-.5)*12,
+      sh:Math.floor(Math.random()*3), // 0=rect 1=circle 2=star
+      a:1
+    });
+  }
+  if(aid)cancelAnimationFrame(aid);animBig();
+}
+function animBig(){
+  cx.clearRect(0,0,cv2.width,cv2.height);let alive=false;
+  pts.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;
+    if(p.y>cv2.height*.75)p.a-=.018;
+    if(p.a>0)alive=true;
+    cx.save();cx.globalAlpha=Math.max(0,p.a);
+    cx.translate(p.x,p.y);cx.rotate(p.rot*Math.PI/180);
+    cx.fillStyle=p.c;
+    if(p.sh===0){cx.fillRect(-p.r,-p.r/2,p.r*2,p.r);}
+    else if(p.sh===1){cx.beginPath();cx.arc(0,0,p.r,0,Math.PI*2);cx.fill();}
+    else{
+      // estrela simples
+      cx.beginPath();
+      for(let s=0;s<5;s++){
+        const a=s*Math.PI*2/5-Math.PI/2;
+        const b=a+Math.PI/5;
+        cx.lineTo(Math.cos(a)*p.r,Math.sin(a)*p.r);
+        cx.lineTo(Math.cos(b)*p.r*.45,Math.sin(b)*p.r*.45);
+      }
+      cx.closePath();cx.fill();
+    }
+    cx.restore();
+  });
+  if(alive)aid=requestAnimationFrame(animBig);else cx.clearRect(0,0,cv2.width,cv2.height);
+}
+function anim(){
+  cx.clearRect(0,0,cv2.width,cv2.height);let alive=false;
+  pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;if(p.y>cv2.height*.65)p.a-=.025;if(p.a>0)alive=true;cx.save();cx.globalAlpha=Math.max(0,p.a);cx.translate(p.x,p.y);cx.rotate(p.rot*Math.PI/180);cx.fillStyle=p.c;if(p.sh){cx.fillRect(-p.r,-p.r/2,p.r*2,p.r);}else{cx.beginPath();cx.arc(0,0,p.r,0,Math.PI*2);cx.fill();}cx.restore();});
+  if(alive)aid=requestAnimationFrame(anim);else cx.clearRect(0,0,cv2.width,cv2.height);
+}
+
+} catch(e) {
+  alert('Erro JS: ' + e.message + ' | linha: ' + (e.lineNumber||e.line||'?'));
+}
+
+/* ── MOBILE EVENT LISTENERS ── */
+(function(){
+  function bindMob(){
+    var btnHome = document.getElementById('mnt-home');
+    var btnBlocos = document.getElementById('mnt-blocos');
+    var btnEtapas = document.getElementById('mnt-etapas');
+    var btnAcolhida = document.getElementById('mnt-acolhida');
+    if(btnHome)    btnHome.addEventListener('click',    function(){ mobTab('home'); });
+    if(btnBlocos)  btnBlocos.addEventListener('click',  function(){ mobTab('blocos'); });
+    if(btnEtapas)  btnEtapas.addEventListener('click',  function(){ mobTab('etapas'); });
+    if(btnAcolhida)btnAcolhida.addEventListener('click',function(){ mobTab('acolhida'); });
+
+    // Cards do home
+    var cards = document.querySelectorAll('.mob-step-card');
+    var tabs = ['acolhida','blocos','etapas'];
+    for(var i=0;i<cards.length;i++){
+      (function(idx){
+        cards[idx].addEventListener('click', function(){ mobTab(tabs[idx]); });
+      })(i);
+    }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bindMob);
+  } else {
+    bindMob();
+  }
+})();
+
+</script>
+/* ── MOBILE EVENT LISTENERS ── */
+(function(){
+  function bindMob(){
+    var btnHome = document.getElementById('mnt-home');
+    var btnBlocos = document.getElementById('mnt-blocos');
+    var btnEtapas = document.getElementById('mnt-etapas');
+    var btnAcolhida = document.getElementById('mnt-acolhida');
+    if(btnHome)    btnHome.addEventListener('click',    function(){ mobTab('home'); });
+    if(btnBlocos)  btnBlocos.addEventListener('click',  function(){ mobTab('blocos'); });
+    if(btnEtapas)  btnEtapas.addEventListener('click',  function(){ mobTab('etapas'); });
+    if(btnAcolhida)btnAcolhida.addEventListener('click',function(){ mobTab('acolhida'); });
+
+    // Cards do home
+    var cards = document.querySelectorAll('.mob-step-card');
+    var tabs = ['acolhida','blocos','etapas'];
+    for(var i=0;i<cards.length;i++){
+      (function(idx){
+        cards[idx].addEventListener('click', function(){ mobTab(tabs[idx]); });
+      })(i);
+    }
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', bindMob);
+  } else {
+    bindMob();
+  }
+})();
+
+</script>
+
+<!-- FESTA DO BLOCO -->
+<div id="festa-overlay">
+  <div class="festa-card">
+    <span class="festa-stars">⭐⭐⭐</span>
+    <span class="festa-emoji" id="festa-emoji">🎉</span>
+    <div class="festa-titulo" id="festa-titulo">Bloco concluído!</div>
+    <div class="festa-sub" id="festa-sub">Você completou todas as atividades!</div>
+    <button class="festa-btn" onclick="fecharFesta()">Continuar →</button>
+  </div>
+</div>
+
+<!-- CONQUISTA DE ETAPA -->
+<div id="etapa-overlay">
+  <div class="etapa-card" id="etapa-card">
+    <span class="etapa-stars">⭐⭐⭐⭐⭐</span>
+    <span class="etapa-icon" id="etapa-icon">🐾</span>
+    <div class="etapa-titulo" id="etapa-titulo">Etapa conquistada!</div>
+    <div class="etapa-nome" id="etapa-nome">Lobo Pata Tenra</div>
+    <div class="etapa-msg" id="etapa-msg">Você concluiu a primeira etapa da jornada!</div>
+    <button class="etapa-btn" id="etapa-btn" onclick="fecharEtapa()">Continuar a jornada 🐺</button>
+  </div>
+</div>
+
+<!-- SIDEBAR ACOLHIDA -->
+<div id="acol-sidebar">
+  <div class="acol-sb-hdr">
+    <div>
+      <h2>🐾 Período de Acolhida</h2>
+      <p>Conclua as 7 atividades para iniciar sua jornada na alcateia</p>
+    </div>
+    <button class="acol-sb-close" onclick="closeAcolhida()">✕</button>
+  </div>
+  <div class="acol-sb-body" id="acol-sb-body"></div>
+  <div class="acol-sb-footer">
+    <div class="acol-footer-prog">
+      <div class="acol-footer-wrap"><div class="acol-footer-bar" id="acol-footer-bar" style="width:0%"></div></div>
+      <div class="acol-footer-pct" id="acol-footer-pct">0 / 7</div>
+    </div>
+  </div>
+</div>
+
+<!-- FESTA ACOLHIDA -->
+<div id="acol-festa-overlay">
+  <div class="acol-festa-card">
+    <span class="acol-festa-stars">⭐⭐⭐⭐⭐</span>
+    <span class="acol-festa-wolf">🐺</span>
+    <div class="acol-festa-titulo">Acolhida concluída!</div>
+    <div class="acol-festa-nome">Bem-vindo à Alcateia!</div>
+    <div class="acol-festa-msg">Você completou o Período de Acolhida e está pronto para iniciar sua jornada nos Blocos de Aprendizagem!</div>
+    <button class="acol-festa-btn" onclick="fecharAcolhidaFesta()">Começar a jornada 🐾</button>
+  </div>
+</div>
+
+<!-- NAV BAR MOBILE -->
+<div id="mob-nav">
+  <button class="mob-tab active" id="mnt-home" id="mnt-home">
+    <span class="mt-icon">🏠</span>Início
+  </button>
+  <button class="mob-tab" id="mnt-blocos">
+    <span class="mt-icon">🧩</span>Blocos
+  </button>
+  <button class="mob-tab" id="mnt-etapas">
+    <span class="mt-icon">⭐</span>Etapas
+  </button>
+  <button class="mob-tab" id="mnt-acolhida">
+    <span class="mt-icon">🐾</span>Acolhida
+  </button>
+</div>
+
+
+<!-- PAINEL HOME MOBILE -->
+<div class="mob-panel mp-home" id="mob-home">
+  <div class="mob-home-inner">
+    <div class="mob-home-hero">
+      <span class="mob-home-wolf">🐺</span>
+      <div class="mob-home-title" id="mob-home-title">Minha Jornada!</div>
+      <div class="mob-home-sub">Siga os passos abaixo para avançar na alcateia</div>
+    </div>
+    <div class="mob-home-steps">
+      <!-- Passo 1: Acolhida -->
+      <button class="mob-step-card">
+        <div class="mob-step-num" style="background:#f5a623;">1</div>
+        <span class="mob-step-icon">🐾</span>
+        <div class="mob-step-info">
+          <div class="mob-step-title">Período de Acolhida</div>
+          <div class="mob-step-desc">Complete as 7 atividades de integração para desbloquear os blocos.</div>
+          <div class="mob-step-status" id="mob-home-acol-status" style="display:inline-block;margin-top:5px;background:rgba(245,166,35,.3);color:#f5e642;">0 / 7 feitas</div>
+        </div>
+        <span class="mob-step-arrow">›</span>
+      </button>
+      <!-- Passo 2: Blocos -->
+      <button class="mob-step-card">
+        <div class="mob-step-num" style="background:#2a7a2a;">2</div>
+        <span class="mob-step-icon">🧩</span>
+        <div class="mob-step-info">
+          <div class="mob-step-title">Blocos de Aprendizagem</div>
+          <div class="mob-step-desc">São 18 blocos com atividades fixas, variáveis e especialidades para conquistar.</div>
+          <div class="mob-step-status" id="mob-home-blocos-status" style="display:inline-block;margin-top:5px;background:rgba(42,122,42,.3);color:#aae8aa;">0 / 18 concluídos</div>
+        </div>
+        <span class="mob-step-arrow">›</span>
+      </button>
+      <!-- Passo 3: Etapas -->
+      <button class="mob-step-card">
+        <div class="mob-step-num" style="background:#2a90d4;">3</div>
+        <span class="mob-step-icon">⭐</span>
+        <div class="mob-step-info">
+          <div class="mob-step-title">Etapas da Jornada</div>
+          <div class="mob-step-desc">Pata Tenra → Saltador → Rastreador → Caçador → Cruzeiro do Sul!</div>
+          <div class="mob-step-status" id="mob-home-etapas-status" style="display:inline-block;margin-top:5px;background:rgba(42,144,212,.3);color:#a8d8ff;">Nenhuma etapa ainda</div>
+        </div>
+        <span class="mob-step-arrow">›</span>
+      </button>
+    </div>
+    <div class="mob-home-lema">🐺 Akela! Nós faremos o nosso melhor! 🐺</div>
+  </div>
+</div>
+
+<!-- PAINEL BLOCOS -->
+<div class="mob-panel mp-blocos" id="mob-blocos">
+  <div class="mob-bloco-list" id="mob-bloco-list"></div>
+</div>
+
+<!-- PAINEL ETAPAS -->
+<div class="mob-panel mp-etapas" id="mob-etapas">
+  <div class="mob-etapas-list" id="mob-etapas-list"></div>
+</div>
+
+<!-- PAINEL ACOLHIDA -->
+<div class="mob-panel mp-acolhida" id="mob-acolhida">
+  <div class="mob-acol-hdr">🐾 Período de Acolhida</div>
+  <div class="mob-acol-prog-row">
+    <div class="mob-acol-prog-wrap"><div class="mob-acol-prog-fill" id="mob-acol-bar" style="width:0%"></div></div>
+    <div class="mob-acol-prog-lbl" id="mob-acol-lbl">0/7</div>
+  </div>
+  <div class="mob-acol-list" id="mob-acol-list"></div>
+</div>
+</body>
+</html>
