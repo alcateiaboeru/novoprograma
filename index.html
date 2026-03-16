@@ -560,8 +560,8 @@ body.mobile-mode .app { padding-bottom:58px; }
 .mob-tab.active .mt-icon { transform:scale(1.15); }
 
 /* lista de blocos mobile */
-.mob-bloco-list { padding:10px 12px;display:flex;flex-direction:column;gap:8px; }
-.mob-eixo-hdr-grid { padding:8px 2px 2px;font-family:'Baloo 2',cursive;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase; }
+.mob-bloco-list { padding:10px 12px 20px;display:grid;grid-template-columns:1fr 1fr;gap:8px; }
+.mob-eixo-hdr-grid { grid-column:1/-1;padding:6px 12px;font-family:'Baloo 2',cursive;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;border-radius:8px;margin-top:8px; }
 .mob-bloco-item {
   border-radius:14px;padding:13px 14px;
   display:flex;align-items:center;gap:12px;
