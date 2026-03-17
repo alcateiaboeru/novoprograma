@@ -509,6 +509,120 @@ html,body{height:100%;overflow:hidden;font-family:'Nunito',sans-serif;}
 .btn-cancel:hover{background:#e0e0e8;}
 .btn-confirm{background:#c0392b;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-family:'Baloo 2',cursive;font-size:14px;font-weight:700;cursor:pointer;}
 .btn-confirm:hover{background:#a0291b;}
+
+/* ══ GUIA DO USUÁRIO ══ */
+#guia-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);
+  z-index:9997;display:none;align-items:flex-end;justify-content:center;
+}
+#guia-overlay.show{display:flex;}
+#guia-panel{
+  background:#fff;border-radius:24px 24px 0 0;
+  width:100%;max-height:90vh;
+  display:flex;flex-direction:column;
+  animation:slideUp .35s cubic-bezier(.17,.67,.35,1.1);
+}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.guia-hdr{
+  padding:16px 20px 12px;border-bottom:1px solid #f0f0f8;
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+}
+.guia-hdr h2{font-family:'Baloo 2',cursive;font-size:20px;font-weight:800;color:#1a1a2e;flex:1;}
+.guia-close{width:32px;height:32px;border-radius:50%;background:#f0f0f4;border:none;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#666;}
+.guia-body{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px;-webkit-overflow-scrolling:touch;}
+.guia-card{border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;}
+.guia-emoji{font-size:32px;flex-shrink:0;margin-top:2px;}
+.guia-txt h3{font-family:'Baloo 2',cursive;font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:4px;}
+.guia-txt p{font-family:'Nunito',sans-serif;font-size:13px;color:#444;line-height:1.55;font-weight:600;}
+.guia-txt p strong{color:#1a1a2e;}
+.gc1{background:#fff8e8;border:2px solid #f5d060;}
+.gc2{background:#e8f5e8;border:2px solid #6abf6a;}
+.gc3{background:#e8eeff;border:2px solid #7ab0f0;}
+.gc4{background:#fff0e8;border:2px solid #f5a060;}
+.gc5{background:#f5e8ff;border:2px solid #c084fc;}
+.guia-footer{padding:12px 20px 24px;flex-shrink:0;text-align:center;}
+.guia-footer p{font-size:11px;color:#aaa;}
+
+/* ══ CAMINHO DO CAÇADOR / CRUZEIRO DO SUL ══ */
+#crz-modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.65);
+  z-index:9995;display:none;align-items:center;justify-content:center;
+  padding:16px;
+}
+#crz-modal.show{display:flex;}
+#crz-panel{
+  background:#fff;border-radius:20px;
+  width:100%;max-width:560px;max-height:90vh;
+  display:flex;flex-direction:column;
+  box-shadow:0 24px 64px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+.crz-hdr{
+  background:linear-gradient(135deg,#1a1a3a,#2a2a5a);
+  padding:20px 22px 16px;flex-shrink:0;
+  position:relative;
+}
+.crz-hdr-stars{font-size:20px;letter-spacing:4px;display:block;margin-bottom:6px;}
+.crz-hdr h2{font-family:'Baloo 2',cursive;font-size:22px;font-weight:800;color:#f5e642;margin-bottom:4px;}
+.crz-hdr p{font-size:12px;color:#a0b8d8;line-height:1.5;}
+.crz-hdr-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.15);border:none;color:#fff;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.crz-hdr-close:hover{background:rgba(255,255,255,.25);}
+
+.crz-body{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:10px;}
+.crz-intro{font-family:'Nunito',sans-serif;font-size:13px;color:#444;line-height:1.55;font-weight:600;padding:10px 14px;background:#f8f8ff;border-radius:10px;border-left:4px solid #8b3fcc;}
+
+.crz-req{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:#fdf8e8;border:1.5px solid #e8c840;}
+.crz-req-icon{font-size:24px;flex-shrink:0;margin-top:1px;}
+.crz-req-txt h4{font-family:'Baloo 2',cursive;font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:3px;}
+.crz-req-txt p{font-family:'Nunito',sans-serif;font-size:12px;color:#555;line-height:1.5;font-weight:600;}
+
+.crz-note{font-family:'Nunito',sans-serif;font-size:11px;color:#888;line-height:1.5;text-align:center;padding:6px 12px;font-style:italic;}
+
+.crz-footer{padding:14px 20px 18px;border-top:1px solid #eee;flex-shrink:0;display:flex;flex-direction:column;gap:8px;align-items:center;}
+#crz-status{font-size:12px;font-weight:700;text-align:center;}
+#crz-status.ok{color:#2a7a2a;}
+#crz-status.nok{color:#c0392b;}
+#crz-btn{
+  font-family:'Baloo 2',cursive;font-size:16px;font-weight:800;
+  border:none;border-radius:99px;padding:13px 36px;cursor:pointer;
+  transition:transform .1s,filter .15s;width:100%;
+}
+#crz-btn.enabled{background:linear-gradient(135deg,#f5e642,#e6c800);color:#1a1a2e;}
+#crz-btn.enabled:hover{filter:brightness(1.08);transform:scale(1.02);}
+#crz-btn.disabled{background:#e0e0e8;color:#aaa;cursor:not-allowed;}
+
+/* Festa do Cruzeiro do Sul */
+#cruzeiro-overlay{
+  position:fixed;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  z-index:9998;pointer-events:none;opacity:0;
+  transition:opacity .4s;
+  background:rgba(10,10,30,.85);
+}
+#cruzeiro-overlay.show{pointer-events:auto;opacity:1;}
+.cruzeiro-card{
+  background:linear-gradient(135deg,#1a1a3a,#2a2a5a);
+  border-radius:28px;padding:48px 56px;text-align:center;
+  box-shadow:0 24px 80px rgba(0,0,0,.5);
+  transform:scale(.7);
+  transition:transform .5s cubic-bezier(.17,.67,.35,1.4);
+  max-width:480px;border:2px solid #f5e64240;
+}
+#cruzeiro-overlay.show .cruzeiro-card{transform:scale(1);}
+.crz-crown{font-size:72px;display:block;margin-bottom:12px;animation:crownFloat 1.2s ease infinite alternate;}
+@keyframes crownFloat{from{transform:translateY(0) rotate(-5deg)}to{transform:translateY(-14px) rotate(5deg)}}
+.crz-big-stars{font-size:32px;letter-spacing:6px;display:block;margin-bottom:10px;animation:starPulse 1.5s ease infinite alternate;}
+@keyframes starPulse{from{opacity:.7;transform:scale(.95)}to{opacity:1;transform:scale(1.05)}}
+.crz-titulo{font-family:'Baloo 2',cursive;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#a0b8d8;margin-bottom:6px;}
+.crz-nome-grande{font-family:'Baloo 2',cursive;font-size:40px;font-weight:800;color:#f5e642;line-height:1.05;margin-bottom:8px;text-shadow:0 0 30px rgba(245,230,66,.4);}
+.crz-sub{font-family:'Nunito',sans-serif;font-size:15px;color:#a0c8e8;line-height:1.5;margin-bottom:28px;}
+.crz-fechar{
+  font-family:'Baloo 2',cursive;font-size:16px;font-weight:700;
+  background:#f5e642;color:#1a1a2e;
+  border:none;border-radius:99px;padding:13px 36px;cursor:pointer;
+  transition:filter .15s,transform .1s;
+}
+.crz-fechar:hover{filter:brightness(1.1);transform:scale(1.04);}
 #cc{position:fixed;inset:0;pointer-events:none;z-index:9999;}
 
 @keyframes blocoFly{0%{transform:scale(1);opacity:1;}50%{transform:scale(1.15);}100%{transform:translateX(80px) scale(.4);opacity:0;}}
@@ -1184,9 +1298,13 @@ body.mobile-mode #mob-search-bar {
         </div>
       </div>
       <div class="hint" id="hint">Conclua um bloco para ele migrar automaticamente para a etapa correta</div>
-      <div class="crz-mini">
-        <div class="stars">⭐⭐⭐⭐⭐</div>
-        <div><h4>Cruzeiro do Sul ✦</h4><p>Complete todos os 18 blocos e os requisitos do Caminho do Caçador</p></div>
+      <div class="crz-mini" onclick="openCaminhoDosCacadores()" style="cursor:pointer;transition:filter .15s;" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter=''">
+        <div class="stars">✦✦✦✦✦</div>
+        <div style="flex:1;">
+          <h4>✦ Cruzeiro do Sul</h4>
+          <p>Complete os 18 blocos + Caminho do Caçador. Toque para saber mais!</p>
+        </div>
+        <span style="font-size:20px;opacity:.6;">→</span>
       </div>
     </div>
   </div>
@@ -2892,6 +3010,52 @@ function confirmReset(){
   closeMenu();
   location.reload();
 }
+
+function openGuia(){ document.getElementById('guia-overlay').classList.add('show'); }
+function closeGuia(){ document.getElementById('guia-overlay').classList.remove('show'); }
+
+/* ══ CRUZEIRO DO SUL ══ */
+function todosBlocosCompletos(){
+  const blocos = ['b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11','b12','b13','b14','b15','b16','b17','b18'];
+  return blocos.every(id => BD[id] && calc(id).done);
+}
+
+function openCaminhoDosCacadores(){
+  const ok = todosBlocosCompletos();
+  const btn = document.getElementById('crz-btn');
+  const status = document.getElementById('crz-status');
+  const completos = ['b1','b2','b3','b4','b5','b6','b7','b8','b9','b10','b11','b12','b13','b14','b15','b16','b17','b18'].filter(id=>BD[id]&&calc(id).done).length;
+  if(ok){
+    btn.className='enabled';
+    status.className='ok';
+    status.textContent='✓ Todos os 18 blocos completos! Você está pronto!';
+  } else {
+    btn.className='disabled';
+    status.className='nok';
+    status.textContent='Faltam '+(18-completos)+' bloco(s) para completar a jornada.';
+  }
+  document.getElementById('crz-modal').classList.add('show');
+}
+
+function closeCruzeiro(){
+  document.getElementById('crz-modal').classList.remove('show');
+}
+
+function tentarCruzeiro(){
+  if(!todosBlocosCompletos()) return;
+  closeCruzeiro();
+  setTimeout(()=>{
+    document.getElementById('cruzeiro-overlay').classList.add('show');
+    confettiBig();
+    setTimeout(confettiBig, 800);
+    setTimeout(confettiBig, 1800);
+    setTimeout(confettiBig, 3000);
+  }, 300);
+}
+
+function fecharCruzeiro(){
+  document.getElementById('cruzeiro-overlay').classList.remove('show');
+}
 /* ── INIT ── */
 try {
 
@@ -3187,6 +3351,17 @@ function anim(){
         </div>
         <span class="mob-step-arrow">›</span>
       </button>
+      <!-- Passo 4: Cruzeiro do Sul -->
+      <button class="mob-step-card" onclick="openCaminhoDosCacadores()" style="background:linear-gradient(135deg,#1a1a3a,#2a2a5a);border:1.5px solid #f5e64240;">
+        <div class="mob-step-num" style="background:#f5e642;color:#1a1a2e;">✦</div>
+        <span class="mob-step-icon">👑</span>
+        <div class="mob-step-info">
+          <div class="mob-step-title" style="color:#f5e642;">Cruzeiro do Sul</div>
+          <div class="mob-step-desc" style="color:#a0b8d8;">Complete os 18 blocos e o Caminho do Caçador para conquistar a maior honra!</div>
+          <div class="mob-step-status" id="mob-home-crz-status" style="display:inline-block;margin-top:5px;background:rgba(245,230,66,.15);color:#f5e642;">Toque para saber mais</div>
+        </div>
+        <span class="mob-step-arrow" style="color:#f5e642;">›</span>
+      </button>
     </div>
     <div class="mob-home-lema">🐺 Akela! Nós faremos o nosso melhor! 🐺<br><span style="font-size:9px;opacity:.4;letter-spacing:.5px;">v1.9</span></div>
   </div>
@@ -3249,6 +3424,10 @@ function anim(){
         style="border:1.5px solid #e0e0e8;border-radius:8px;padding:8px 10px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:#222;outline:none;width:100%;"
         oninput="salvarNome(this.value)">
     </div>
+    <button onclick="closeDrawer();openGuia();"
+      style="background:#e8eeff;border:1.5px solid #a0b8f0;border-radius:8px;padding:8px 12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:#2a4a8a;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;">
+      📖 Como usar o app
+    </button>
     <button onclick="closeDrawer();showResetModal();"
       style="background:#fff0f0;border:1.5px solid #f0c0c0;border-radius:8px;padding:8px 12px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:#c0392b;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px;">
       🗑️ Resetar progresso
@@ -3315,6 +3494,147 @@ function anim(){
       <button class="btn-cancel" onclick="hideResetModal()">Cancelar</button>
       <button class="btn-confirm" onclick="confirmReset()">Apagar tudo</button>
     </div>
+  </div>
+</div>
+
+<!-- GUIA DO USUÁRIO -->
+<div id="guia-overlay" onclick="if(event.target===this)closeGuia()">
+  <div id="guia-panel">
+    <div class="guia-hdr">
+      <span style="font-size:24px;">📖</span>
+      <h2>Como usar o app</h2>
+      <button class="guia-close" onclick="closeGuia()">✕</button>
+    </div>
+    <div class="guia-body">
+
+      <div class="guia-card gc1">
+        <span class="guia-emoji">🐾</span>
+        <div class="guia-txt">
+          <h3>Começa pela Acolhida!</h3>
+          <p>Antes de tudo, você precisa completar o <strong>Período de Acolhida</strong>. São 7 atividades para você conhecer sua alcateia, seu uniforme e as regras do lobinho. Toque em <strong>"Ver atividades"</strong> no banner laranja e marque cada uma que você já fez!</p>
+        </div>
+      </div>
+
+      <div class="guia-card gc2">
+        <span class="guia-emoji">✅</span>
+        <div class="guia-txt">
+          <h3>Marcando uma atividade</h3>
+          <p>Toque em qualquer <strong>bloco de aprendizagem</strong> para ver as atividades dele. Cada atividade tem um <strong>círculo</strong> ao lado — toque nele para marcar que você já fez! O círculo fica colorido quando marcado.</p>
+        </div>
+      </div>
+
+      <div class="guia-card gc3">
+        <span class="guia-emoji">🎉</span>
+        <div class="guia-txt">
+          <h3>Completando um bloco</h3>
+          <p>Cada bloco tem dois tipos de atividade:<br><br>
+          ⭐ <strong>Fixas</strong> — são obrigatórias! Você precisa fazer <strong>todas</strong> elas, sem exceção.<br><br>
+          ◆ <strong>Variáveis</strong> — aqui você escolhe! Cada bloco pede um número mínimo (tipo 4 ou 5). Não precisa fazer todas, só o mínimo pedido.<br><br>
+          🏅 <strong>Dica especial:</strong> em alguns blocos, conquistar uma <strong>Especialidade ou Insígnia</strong> substitui as variáveis que faltam — é um atalho para quem já tem esse conhecimento!<br><br>
+          Quando completar tudo, o bloco <strong>voa</strong> para sua etapa e rola uma festa! 🎊</p>
+        </div>
+      </div>
+
+      <div class="guia-card gc4">
+        <span class="guia-emoji">⭐</span>
+        <div class="guia-txt">
+          <h3>As etapas da jornada</h3>
+          <p>Conforme você completa blocos, vai conquistando etapas:<br>
+          <strong>🐾 Pata Tenra</strong> — 4 blocos<br>
+          <strong>🌊 Saltador</strong> — mais 4 blocos<br>
+          <strong>🔍 Rastreador</strong> — mais 5 blocos<br>
+          <strong>🏹 Caçador</strong> — mais 5 blocos<br>
+          Complete todos os 18 e conquiste o <strong>✦ Cruzeiro do Sul!</strong></p>
+        </div>
+      </div>
+
+      <div class="guia-card gc5">
+        <span class="guia-emoji">🏅</span>
+        <div class="guia-txt">
+          <h3>Especialidades e Insígnias</h3>
+          <p>Em alguns blocos você pode conquistar uma <strong>Especialidade</strong> — ela substitui as atividades variáveis que faltam! As <strong>Insígnias</strong> são ainda mais especiais e difíceis de conquistar. Aparecem com um badge colorido nas abas do bloco.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="guia-footer">
+      <p>🐺 Akela! Nós faremos o nosso melhor!</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CAMINHO DO CAÇADOR -->
+<div id="crz-modal">
+  <div id="crz-panel">
+    <div class="crz-hdr">
+      <button class="crz-hdr-close" onclick="closeCruzeiro()">✕</button>
+      <span class="crz-hdr-stars">✦ ✦ ✦ ✦ ✦</span>
+      <h2>Caminho do Caçador</h2>
+      <p>A aventura final para conquistar o Reconhecimento do Cruzeiro do Sul — a maior honra do Ramo Lobinho.</p>
+    </div>
+    <div class="crz-body">
+      <div class="crz-intro">
+        O Caminho do Caçador é uma atividade ao ar livre de um dia inteiro — manhã, tarde e noite — projetada para estimular a <strong>autonomia</strong> e a reflexão sobre os valores da Lei e Promessa do Lobinho. O lobinho planeja e vive a própria caçada, colocando a prova tudo que aprendeu! 🐺
+      </div>
+
+      <div class="crz-req">
+        <span class="crz-req-icon">📋</span>
+        <div class="crz-req-txt">
+          <h4>Planejar a atividade</h4>
+          <p>O lobinho sugere o local e as atividades que gostaria de vivenciar. Os Velhos Lobos ajudam, mas quem decide é o lobinho! Outros lobinhos da última etapa podem participar juntos.</p>
+        </div>
+      </div>
+
+      <div class="crz-req">
+        <span class="crz-req-icon">🎒</span>
+        <div class="crz-req-txt">
+          <h4>Preparar a mochila</h4>
+          <p>Cada lobinho organiza sua própria mochila de forma autônoma, incluindo lanche, água, lanterna e capa de chuva — sem ajuda dos adultos!</p>
+        </div>
+      </div>
+
+      <div class="crz-req">
+        <span class="crz-req-icon">🧭</span>
+        <div class="crz-req-txt">
+          <h4>Trilha com sinais de pista e obstáculos</h4>
+          <p>Percurso de pelo menos 1km, orientando-se por sinais de pista e superando obstáculos previamente definidos pelos Velhos Lobos.</p>
+        </div>
+      </div>
+
+      <div class="crz-req">
+        <span class="crz-req-icon">⭐</span>
+        <div class="crz-req-txt">
+          <h4>Orientar-se pelo Cruzeiro do Sul</h4>
+          <p>Durante a noite, identificar a constelação do Cruzeiro do Sul e conhecer o nome das estrelas que a compõem.</p>
+        </div>
+      </div>
+
+      <div class="crz-req">
+        <span class="crz-req-icon">🔥</span>
+        <div class="crz-req-txt">
+          <h4>Acender fogueira e preparar refeição</h4>
+          <p>Trabalhar em equipe para montar e acender uma pequena fogueira, sob supervisão e em local permitido. Preparar uma refeição simples ou bebida quente.</p>
+        </div>
+      </div>
+
+      <div class="crz-note">A atividade deve ser acompanhada por dois adultos da seção e contar com todas as autorizações de segurança.</div>
+    </div>
+    <div class="crz-footer">
+      <div id="crz-status"></div>
+      <button id="crz-btn" class="disabled" onclick="tentarCruzeiro()">✦ Conquistar o Cruzeiro do Sul</button>
+    </div>
+  </div>
+</div>
+
+<!-- FESTA DO CRUZEIRO DO SUL -->
+<div id="cruzeiro-overlay">
+  <div class="cruzeiro-card">
+    <span class="crz-big-stars">✦ ✦ ✦ ✦ ✦</span>
+    <span class="crz-crown">👑</span>
+    <div class="crz-titulo">Reconhecimento conquistado!</div>
+    <div class="crz-nome-grande">Cruzeiro do Sul</div>
+    <div class="crz-sub">Todos os 18 blocos completos e o Caminho do Caçador realizado.<br>Você é um verdadeiro Lobo Caçador! 🐺</div>
+    <button class="crz-fechar" onclick="fecharCruzeiro()">Que a Jângal celebre! 🐺</button>
   </div>
 </div>
 </body>
